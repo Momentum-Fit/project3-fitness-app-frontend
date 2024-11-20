@@ -9,13 +9,41 @@ function AuthProviderWrapper(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  /* 
-    Functions for handling the authentication status (isLoggedIn, isLoading, user)
-    will be added here later in the next step
-  */
+  const storeToken = (token) => {
+    localStorage.setItem("authToken", token);
+  };
+  const authenticateUser = () => {
+    const storedToken = localStorage.getItem("authToken");
+    if (storedToken) {
+      axios
+        .get(`${API_URL}/auth/verify`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        })
+        .then((response) => {
+          const user = response.data;
+          setIsLoggedIn(true);
+          setIsLoading(false);
+          setUser(user);
+        })
+        .catch((error) => {
+          setIsLoggedIn(false);
+          setIsLoading(false);
+          setUser(null);
+        });
+    } else {
+      setIsLoggedIn(false);
+      setIsLoading(false);
+      setUser(null);
+    }
+  };
+
+  useEffect(() => {
+    //  <==  ADD
+    // to be updated in the next step
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, isLoading, user }}>
+    <AuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken }}>
       {props.children}
     </AuthContext.Provider>
   );
