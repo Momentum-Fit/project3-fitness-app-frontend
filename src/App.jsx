@@ -6,6 +6,7 @@ import HomePage from "./Pages/HomePage";
 import ExercisesList from "./components/ExercisesList";
 import Navbar from "./components/Navbar";
 import PageNotFound from "./Pages/PageNotFound";
+import ExerciseForm from "./components/ExerciseForm";
 import CreatePlan from "./components/CreatePlan";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/auth/login" element={<LoginPage />} />
         <Route path="/auth/signup" element={<SignUpPage />} />
         <Route path="/exercises" element={<ExercisesList />} />
+        <Route path="/create-exercise" element={<ExerciseForm />} />
         <Route path="/createPlan" element={<CreatePlan />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
