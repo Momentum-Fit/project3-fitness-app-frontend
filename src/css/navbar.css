@@ -1,0 +1,9 @@
+nav {
+  background-color: #e9eef6;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-buttons-container {
+  padding: 2rem;
+}
