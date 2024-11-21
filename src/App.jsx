@@ -6,6 +6,7 @@ import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
 import ExercisesList from "./components/ExercisesList";
 import Navbar from "./components/Navbar";
+import PageNotFound from "./Pages/PageNotFound";
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path="/auth/login" element={<LoginPage />} />
         <Route path="/auth/signup" element={<SignUpPage />} />
         <Route path="/exercises" element={<ExercisesList />} />
-        <Route path="/*" element={<h1>Nothing to see</h1>} />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </>
   );
