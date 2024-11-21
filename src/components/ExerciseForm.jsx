@@ -16,6 +16,8 @@ function ExerciseForm() {
   const handleCategory = (e) => setCategory(e.target.value);
   const handleDifficulty = (e) => setDifficulty(e.target.value);
 
+  const storedToken = localStorage.getItem("authToken");
+
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -27,16 +29,19 @@ function ExerciseForm() {
     }
 
     const newExercise = {
-      name: name,
-      description: description,
-      category: category,
-      difficulty: difficulty,
+      name,
+      description,
+      category,
+      difficulty,
     };
 
     setError("");
 
     axios
-      .post(`${API_URL}/api/exercises`, newExercise)
+      .post(`${API_URL}/api/exercises`, newExercise, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+
       .then((response) => {
         setName("");
         setDescription("");
