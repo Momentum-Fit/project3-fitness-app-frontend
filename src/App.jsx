@@ -10,6 +10,8 @@ import PageNotFound from "./Pages/PageNotFound";
 import ExerciseForm from "./components/ExerciseForm";
 
 function App() {
+  const [count, setCount] = useState(0)
+
   return (
     <>
       <Navbar />
@@ -22,7 +24,7 @@ function App() {
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
