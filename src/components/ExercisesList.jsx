@@ -13,7 +13,7 @@ function ExercisesList() {
         const reverseNewResponse = response.data.reverse();
         setExercises(reverseNewResponse);
       })
-      .catch((error) => console.error("Error fetching jobs:", error));
+      .catch((error) => console.error("Error fetching exercises:", error));
   }, []);
   return (
     <div>
