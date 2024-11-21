@@ -4,15 +4,18 @@ import { Routes, Route } from "react-router-dom";
 import SignUpPage from "./Pages/SignUpPage";
 import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
+import ExercisesList from "./components/ExercisesList";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
     <>
-      <h1>this is the app</h1>
+      <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/auth/login" element={<LoginPage />} />
         <Route path="/auth/signup" element={<SignUpPage />} />
+        <Route path="/exercises" element={<ExercisesList />} />
         <Route path="/*" element={<h1>Nothing to see</h1>} />
       </Routes>
     </>
