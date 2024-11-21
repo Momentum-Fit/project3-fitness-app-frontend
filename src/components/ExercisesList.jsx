@@ -20,7 +20,7 @@ function ExercisesList() {
       {exercises &&
         exercises.map((exercise) => {
           return (
-            <div key={exercise.id}>
+            <div key={exercise._id}>
               <p>name: {exercise.name}</p>
               <p>description: {exercise.description}</p>
               <p>category: {exercise.category}</p>
