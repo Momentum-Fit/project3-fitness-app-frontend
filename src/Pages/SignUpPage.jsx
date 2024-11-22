@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
+import "../css/auth.css";
 
 const API_URL = "http://localhost:5005";
 
@@ -10,6 +11,7 @@ function SignUpPage(props) {
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
   const { storeToken, authenticateUser } = useContext(AuthContext);
@@ -26,35 +28,66 @@ function SignUpPage(props) {
       .then((response) => {
         const token = response.data.authToken;
 
-        // Store the token and authenticate the user
         storeToken(token);
         authenticateUser();
         navigate("/");
+        setIsModalOpen(false);
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
       });
   };
+  const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   return (
-    <div className="signup-container">
-      <h1>Signup Page</h1>
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-        <label>Password: </label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
-        <button type="submit">Sign Up</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+    <div className="auth-container">
+      {!isModalOpen && (
+        <>
+          <h1>Signup Page</h1>
+          <button onClick={toggleModal}>Sign Up</button>
+        </>
+      )}
+
+      {isModalOpen && (
+        <div className="modal">
+          <div className="modal-overlay" onClick={toggleModal}></div>
+          <div className="modal-content">
+            <span className="close" onClick={toggleModal}>
+              &times;
+            </span>
+            <h2>Sign Up</h2>
+            <form onSubmit={handleSignupSubmit}>
+              <label>Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={handleEmail}
+                required
+              />
+              <label>Password: </label>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={handlePassword}
+                required
+              />
+              <label>Name:</label>
+              <input
+                type="text"
+                name="name"
+                value={name}
+                onChange={handleName}
+                required
+              />
+              <button type="submit">Sign Up</button>
+            </form>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import "../css/auth.css";
 
 const API_URL = "http://localhost:5005";
 
@@ -9,9 +10,9 @@ function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const navigate = useNavigate();
-
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
   const handleEmail = (e) => setEmail(e.target.value);
@@ -28,6 +29,7 @@ function LoginPage(props) {
         storeToken(response.data.authToken);
         authenticateUser();
         navigate("/");
+        setIsModalOpen(false); // Close modal on successful login
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -35,28 +37,53 @@ function LoginPage(props) {
       });
   };
 
+  const toggleModal = () => setIsModalOpen(!isModalOpen); // Toggle modal visibility
+
   return (
-    <div className="login-container">
-      <h1>Login</h1>
+    <div className="auth-container">
+      {!isModalOpen && (
+        <>
+          <h1>Login Page</h1>
+          <button onClick={toggleModal}>Log In</button>
+        </>
+      )}
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+      {isModalOpen && (
+        <>
+          <div className="modal-overlay" onClick={toggleModal}></div>
+          <div className="modal-content">
+            <span className="close" onClick={toggleModal}>
+              &times;
+            </span>
+            <h2>Login</h2>
+            <form onSubmit={handleLoginSubmit}>
+              <label>Email:</label>
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={handleEmail}
+                required
+              />
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+              <label>Password:</label>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={handlePassword}
+                required
+              />
 
-        <button type="submit">Login</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+              <button type="submit">Login</button>
+            </form>
+            {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+            <p>Don't have an account yet?</p>
+            <Link to={"/signup"}> Sign Up</Link>
+          </div>
+        </>
+      )}
     </div>
   );
 }
