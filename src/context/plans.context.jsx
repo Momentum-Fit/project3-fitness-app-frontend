@@ -6,6 +6,8 @@ const PlansContext = React.createContext();
 const PlansProvider = ({ children }) => {
   const [plans, setPlans] = useState();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
 
   useEffect(() => {
     const getPlans = async () => {
@@ -35,6 +37,25 @@ const PlansProvider = ({ children }) => {
     }
     };
 
+    const createPlan = async (planData) => {
+      const storedToken = localStorage.getItem("authToken");
+      if (!storedToken) {
+        setError("User is not authenticated.");
+        return;
+      }
+  
+      try {
+        const response = await axios.post("http://localhost:5005/api/plans", planData, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        });
+        setPlans((prevPlans) => [...prevPlans, response.data]); 
+        console.log("Plan created:", response.data);
+      } catch (error) {
+        console.log("Error creating plan:", error);
+        setError("Failed to create plan.");
+      }
+    };
+
     const deletePlan = async (planId) => {
       const storedToken = localStorage.getItem("authToken");
       if (!storedToken) {
@@ -43,9 +64,9 @@ const PlansProvider = ({ children }) => {
       }
 
       try {
-        const response = await axios.delete(`/api/plans/${planId}`, {
-          headers: { Authorization: `Bearer ${storedToken}`
-        }})
+        const response = await axios.delete(`http://localhost:5005/api/plans/${planId}`, {
+          headers: { Authorization: `Bearer ${storedToken}`}
+        })
       setPlans((prevPlans) => prevPlans.filter((plan) => plan._id === planId));
       console.log(response.data.message)
       }
@@ -54,11 +75,11 @@ const PlansProvider = ({ children }) => {
       }
 
       }
-    }
+    
   
 
   return (
-    <PlansContext.Provider value={{ plans, loading, getPlanById, deletePlan }}>
+    <PlansContext.Provider value={{ plans, loading, getPlanById, deletePlan, createPlan }}>
       {children}
     </PlansContext.Provider>
   );
