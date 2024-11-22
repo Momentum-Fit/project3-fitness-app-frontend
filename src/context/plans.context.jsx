@@ -6,6 +6,7 @@ const PlansContext = React.createContext();
 const PlansProvider = ({ children }) => {
   const [plans, setPlans] = useState();
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getPlans = async () => {
@@ -36,6 +37,56 @@ const PlansProvider = ({ children }) => {
     }
   };
 
+  const createPlan = async (planData) => {
+    const storedToken = localStorage.getItem("authToken");
+    if (!storedToken) {
+      setError("User is not authenticated.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5005/api/plans",
+        planData,
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
+      );
+      setPlans((prevPlans) => [...prevPlans, response.data]);
+      console.log("Plan created:", response.data);
+    } catch (error) {
+      console.log("Error creating plan:", error);
+      setError("Failed to create plan.");
+    }
+  };
+
+  const updatePlan = async (updatedPlan) => {
+    const storedToken = localStorage.getItem("authToken");
+
+    if (!storedToken) {
+      setError("User is not authenticated.");
+      return;
+    }
+
+    try {
+      const response = await axios.patch(
+        `http://localhost:5005/api/plans/${updatedPlan._id}`,
+        updatedPlan,
+        { headers: { Authorization: `Bearer ${storedToken}` } }
+      );
+
+      setPlans((prevPlans) =>
+        prevPlans.map((plan) =>
+          plan._id === updatedPlan._id ? response.data : plan
+        )
+      );
+      console.log("Plan updated:", response.data);
+    } catch (error) {
+      console.error("Error updating plan:", error);
+      setError("Failed to update plan.");
+    }
+  };
+
   const deletePlan = async (planId) => {
     const storedToken = localStorage.getItem("authToken");
     if (!storedToken) {
@@ -44,9 +95,12 @@ const PlansProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.delete(`/api/plans/${planId}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      });
+      const response = await axios.delete(
+        `http://localhost:5005/api/plans/${planId}`,
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
+      );
       setPlans((prevPlans) => prevPlans.filter((plan) => plan._id === planId));
       console.log(response.data.message);
     } catch (error) {
@@ -55,7 +109,16 @@ const PlansProvider = ({ children }) => {
   };
 
   return (
-    <PlansContext.Provider value={{ plans, loading, getPlanById, deletePlan }}>
+    <PlansContext.Provider
+      value={{
+        plans,
+        loading,
+        updatePlan,
+        getPlanById,
+        deletePlan,
+        createPlan,
+      }}
+    >
       {children}
     </PlansContext.Provider>
   );

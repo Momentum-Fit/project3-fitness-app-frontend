@@ -5,7 +5,7 @@ import { ExercisesContext } from "../context/exercises.context";
 
 
 function CreatePlan() {
-  const [title, setTitle] = useState("");
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("hiit");
   const [length, setLength] = useState("4");
@@ -25,22 +25,24 @@ function CreatePlan() {
     e.preventDefault();
 
     const planDetails = {
-      title: title,
+      name: name,
       description: description,
       category: category,
       length: length,
-      exercises: selectedExercises.map((exerciseId) => ({ exerciseId })),
-      repetitions: repetitions,
+      exercises: selectedExercises.map(({ exerciseId, repetitions }) => ({
+      exerciseId: exerciseId, // Send exerciseId as a string, not as ObjectId
+      repetitions,
+    }))
     };
 
     await createPlan(planDetails);
 
-    setTitle("");
+    setName("");
     setDescription("");
     setCategory("");
     setLength("");
-    setSelectedExercises("");
-    setRepetitions(Number);
+    setSelectedExercises([]);
+    setRepetitions(12);
 
     navigate("/");
 };
@@ -68,11 +70,11 @@ if(loading) return <div>Loading exercises...</div>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="title"
-          placeholder="enter title"
-          value={title}
+          name="name"
+          placeholder="enter name"
+          value={name}
           onChange={(e) => {
-            setTitle(e.target.value);
+            setName(e.target.value);
           }}
         />
         <input

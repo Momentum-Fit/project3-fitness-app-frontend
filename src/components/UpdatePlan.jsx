@@ -7,20 +7,19 @@ import { ExercisesContext } from "../context/exercises.context";
 function UpdatePlan() {
     const {planId} = useParams();
     const {plans, updatePlan} = useContext(PlansContext);
-    const updateArray = plans.filter((plan) => {
-        if (!updatedPlan) return <div>Plan not found.</div>;
-        return planId === plan._id
-        });
-    const updatedPlan = updateArray[0];
     const { exercises } = useContext(ExercisesContext);
     const navigate = useNavigate();
-
-  const [title, setTitle] = useState(updatedPlan.title);
+    const updatedPlan = plans.find(plan => plan._id === planId);
+    if (!updatedPlan) {
+        return <div>Plan not found.</div>;
+    }
+   
+  const [name, setName] = useState(updatedPlan.name);
   const [description, setDescription] = useState(updatedPlan.description);
-  const [category, setCategory] = useState("hiit");
-  const [length, setLength] = useState("4");
+  const [category, setCategory] = useState(updatedPlan.category);
+  const [length, setLength] = useState(updatedPlan.length);
   const [selectedExercises, setSelectedExercises] = useState(updatedPlan.exercises || []);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
 
   if (!plans || !exercises) return <div>Loading...</div>;
 
@@ -29,7 +28,8 @@ function UpdatePlan() {
     e.preventDefault();
 
     const planDetails = {
-      title: title,
+      _id: planId,
+      name: name,
       description: description,
       category: category,
       length: length,
@@ -37,7 +37,6 @@ function UpdatePlan() {
     };
 
     await updatePlan(planDetails);
-
     navigate("/");
 };
 
@@ -62,11 +61,11 @@ function UpdatePlan() {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          name="title"
-          placeholder="enter title"
-          value={title}
+          name="name"
+          placeholder="enter name"
+          value={name}
           onChange={(e) => {
-            setTitle(e.target.value);
+            setName(e.target.value);
           }}
         />
         <input
