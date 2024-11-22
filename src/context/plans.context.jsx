@@ -34,10 +34,31 @@ const PlansProvider = ({ children }) => {
       console.log(error, "error fetching specified plan");
     }
     };
+
+    const deletePlan = async (planId) => {
+      const storedToken = localStorage.getItem("authToken");
+      if (!storedToken) {
+        setError("User is not authenticated");
+        return;
+      }
+
+      try {
+        const response = await axios.delete(`/api/plans/${planId}`, {
+          headers: { Authorization: `Bearer ${storedToken}`
+        }})
+      setPlans((prevPlans) => prevPlans.filter((plan) => plan._id === planId));
+      console.log(response.data.message)
+      }
+      catch (error) {
+        console.log(error, "error deleting plan");
+      }
+
+      }
+    }
   
 
   return (
-    <PlansContext.Provider value={{ plans, loading, getPlanById }}>
+    <PlansContext.Provider value={{ plans, loading, getPlanById, deletePlan }}>
       {children}
     </PlansContext.Provider>
   );
