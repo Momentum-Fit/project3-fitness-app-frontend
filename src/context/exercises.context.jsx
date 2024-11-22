@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 const ExercisesContext = React.createContext();
 
 const ExercisesProvider = ({ children }) => {
-  const [exercises, setExercises] = useState();
+  const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,6 +14,7 @@ const ExercisesProvider = ({ children }) => {
         setExercises(response.data);
       } catch (error) {
         console.log("error fetching exercises", error);
+        setExercises([]);
       } finally {
         setLoading(false);
       }

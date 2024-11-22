@@ -10,12 +10,16 @@ function CreatePlan() {
   const [category, setCategory] = useState("hiit");
   const [length, setLength] = useState("4");
   const [selectedExercises, setSelectedExercises] = useState([]);
-  const [repetitions, setRepetitions] = useState("");
+  const [repetitions, setRepetitions] = useState(12);
   const [loading, setLoading] = useState();
 
     const {createPlan} = useContext(PlansContext);
     const { exercises } = useContext(ExercisesContext);
     const navigate = useNavigate();
+
+    if (!exercises || exercises.length === 0) {
+        return <div>No exercises available.</div>; 
+      }
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,14 +40,14 @@ function CreatePlan() {
     setCategory("");
     setLength("");
     setSelectedExercises("");
-    setRepetitions("");
+    setRepetitions(Number);
 
     navigate("/");
 };
 
     const handleExerciseSelection = (exerciseId, checked) => {
         if(checked) {
-            setSelectedExercises((prev) => [...prev, {exerciseId, repetitions: 12 }])
+            setSelectedExercises((prev) => [...prev, {exerciseId, repetitions}])
         }
         else {
             setSelectedExercises((prev) => 
@@ -54,7 +58,7 @@ function CreatePlan() {
     const handleRepetitionChange = (exerciseId, repetitions) => {
         setSelectedExercises((prev) => 
         prev.map((exercise) => 
-        exercise.exerciseId === exerciseId ? {...exercise, repetitions: parseInt(repetitions, 12)} : exercise ))
+        exercise.exerciseId === exerciseId ? {...exercise, repetitions: parseInt(repetitions)} : exercise ))
     }
 
 if(loading) return <div>Loading exercises...</div>
@@ -116,7 +120,7 @@ if(loading) return <div>Loading exercises...</div>
                     type="number"
                     min="1"
                     value={
-                      selectedExercises.find((selected) => selected.exerciseId === exercise._id)?.repetitions || 10
+                      selectedExercises.find((selected) => selected.exerciseId === exercise._id).repetitions
                     }
                     onChange={(e) => handleRepetitionChange(exercise._id, e.target.value)}
                   />
