@@ -56,6 +56,33 @@ const PlansProvider = ({ children }) => {
       }
     };
 
+    const updatePlan = async (updatedPlan) => {
+      const storedToken = localStorage.getItem("authToken");
+    
+      if (!storedToken) {
+        setError("User is not authenticated.");
+        return;
+      }
+    
+      try {
+        const response = await axios.patch(
+          `http://localhost:5005/api/plans/${updatedPlan._id}`,
+          updatedPlan,
+          { headers: { Authorization: `Bearer ${storedToken}` } }
+        );
+    
+        setPlans((prevPlans) =>
+          prevPlans.map((plan) =>
+            plan._id === updatedPlan._id ? response.data : plan
+          )
+        );
+        console.log("Plan updated:", response.data);
+      } catch (error) {
+        console.error("Error updating plan:", error);
+        setError("Failed to update plan.");
+      }
+    };
+
     const deletePlan = async (planId) => {
       const storedToken = localStorage.getItem("authToken");
       if (!storedToken) {
@@ -79,7 +106,7 @@ const PlansProvider = ({ children }) => {
   
 
   return (
-    <PlansContext.Provider value={{ plans, loading, getPlanById, deletePlan, createPlan }}>
+    <PlansContext.Provider value={{ plans, loading, updatePlan, getPlanById, deletePlan, createPlan }}>
       {children}
     </PlansContext.Provider>
   );

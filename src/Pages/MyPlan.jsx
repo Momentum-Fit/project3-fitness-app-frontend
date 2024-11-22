@@ -2,6 +2,9 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { PlansContext } from "../context/plans.context";
 import axios from "axios";
+import UpdatePlan from "../components/UpdatePlan";
+import Popup from "../components/Popup";
+import "../css/popup.css"
 
 function MyPlan() {
   const { planId } = useParams();
@@ -9,6 +12,8 @@ function MyPlan() {
   const [plan, setPlan] = useState(null);
   const [planLoading, setPlanLoading] = useState(true);
   const [exercises, setExercises] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
 
   useEffect(() => {
     const getPlan = async () => {
@@ -43,8 +48,23 @@ function MyPlan() {
 
   if (!plan) return <div className="text-center">Plan not found!</div>;
 
+  const openPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   return (
     <div>
+    <div>
+      <button onClick={openPopup}>Update My Plan</button>
+      <Popup isOpen={isPopupOpen} onClose={closePopup}>
+        <h2>Update My Plan</h2>
+        <UpdatePlan />
+        </Popup>
+      </div>
       <p>Name: {plan.name}</p>
       <p>Description: {plan.description}</p>
       <p>Category: {plan.category}</p>
