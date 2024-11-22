@@ -21,8 +21,23 @@ const PlansProvider = ({ children }) => {
     getPlans();
   }, []);
 
+  
+    const getPlanById = async (planId) => {
+      const storedToken = localStorage.getItem("authToken")
+    try {
+      const response = await axios.get(`http://localhost:5005/api/plans/${planId}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      return response.data;
+    }
+    catch (error) {
+      console.log(error, "error fetching specified plan");
+    }
+    };
+  
+
   return (
-    <PlansContext.Provider value={{ plans, loading }}>
+    <PlansContext.Provider value={{ plans, loading, getPlanById }}>
       {children}
     </PlansContext.Provider>
   );

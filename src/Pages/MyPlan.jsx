@@ -1,52 +1,65 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useState, useEffect, useContext } from "react";
 import { PlansContext } from "../context/plans.context";
+import axios from "axios";
 
-const API_URL = "http://localhost:5005";
 
 function MyPlan() {
   const { planId } = useParams();
+  const { getPlanById, loading } = useContext(PlansContext); 
   const [plan, setPlan] = useState(null);
+  const [planLoading, setPlanLoading] = useState(true);
+  const [exercises, setExercises] = useState([]);
 
-  const storedToken = localStorage.getItem("authToken");
 
   useEffect(() => {
-    axios
-      .get(`${API_URL}/api/plans/${planId}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        console.log(response);
-        setPlan(response.data);
-      })
-      .catch((error) => console.error("Error fetching plan details:", error));
-  }, [planId, storedToken, setPlan]);
+    const getPlan = async () => {
+      try {
+        const fetchedPlan = await getPlanById(planId); 
+        setPlan(fetchedPlan);
+        const exerciseDetails = await Promise.all(
+          fetchedPlan.exercises.map(async (exercise) => {
+            const response = await axios.get(
+              `http://localhost:5005/api/exercises/${exercise.exerciseId}`
+            );
+            return { ...exercise, details: response.data };
+          })
+        );
+        setExercises(exerciseDetails);
+      } catch (error) {
+        console.error("Error fetching specific plan:", error);
+      } finally {
+        setPlanLoading(false);
+      }
+    };
+  
+    getPlan();
+  }, [planId, getPlanById]);
 
-  if (!plan) return <div className="text-center">Loading...</div>;
+  if (loading || planLoading) return <div className="text-center">Loading...</div>;
+
+  if (!plan) return <div className="text-center">Plan not found!</div>;
 
   return (
     <div>
-      <p>name: {plan.name}</p>
-      <p>description: {plan.description}</p>
-      <p> category: {plan.category}</p>
-      <p>length: {plan.length}</p>
-      <p>
-        exercises:
-        {plan &&
-          plan.exercises.map((exercise) => {
-            return (
-              <div key={exercise._id}>
-                <p>name: {exercise.name}</p>
-                <p>description: {exercise.description}</p>
-                <p>category: {exercise.category}</p>
-                <p>difficulty: {exercise.difficulty}</p>
-                <p></p>
-              </div>
-            );
-          })}
-      </p>
+      <p>Name: {plan.name}</p>
+      <p>Description: {plan.description}</p>
+      <p>Category: {plan.category}</p>
+      <p>Length: {plan.length}</p>
+      <div>
+      <h3>Exercises:</h3>
+        {exercises?.map((exercise) => (
+          <div key={exercise._id}>
+            <p>Name: {exercise.details?.name}</p>
+            <p>Description: {exercise.details?.description}</p>
+            <p>Repetitions: {exercise.repetitions}</p>
+            <p>Category: {exercise.details?.category}</p>
+            <p>Difficulty: {exercise.details?.difficulty}</p>
+          </div>
+        ))}
+    </div>
     </div>
   );
 }
+
 export default MyPlan;
