@@ -10,6 +10,8 @@ import ExerciseForm from "./components/ExerciseForm";
 import CreatePlan from "./components/CreatePlan";
 import MyPlan from "./Pages/MyPlan";
 import PlansPage from "./Pages/PlansPage";
+import Footer from "./components/Footer";
+import UserProfilePage from "./Pages/UserProfilePage";
 
 function App() {
   return (
@@ -24,8 +26,10 @@ function App() {
         <Route path="/createPlan" element={<CreatePlan />} />
         <Route path="/plans" element={<PlansPage />} />
         <Route path="/plans/:planId" element={<MyPlan />} />
+        <Route path="/profile" element={<UserProfilePage />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
+      <Footer />
     </>
   );
 }
