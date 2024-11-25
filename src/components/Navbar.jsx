@@ -12,7 +12,12 @@ function Navbar() {
     <nav>
       <img className="logo" src={logo} />
       <div className="nav-buttons-container">
-        <button>home</button>
+        <Link to="/">
+          <button>home</button>
+        </Link>
+        <Link to="/plans">
+          <button>Workout Plans</button>
+        </Link>
 
         {isLoggedIn && (
           <>
