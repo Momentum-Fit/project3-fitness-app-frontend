@@ -2,13 +2,15 @@ import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
 import "../css/navbar.css";
+import "../App.css";
+import logo from "../assets/logo.jpeg";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
   return (
     <nav>
-      <img className="logo" />
+      <img className="logo" src={logo} />
       <div className="nav-buttons-container">
         <button>home</button>
 

@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import "../css/auth.css";
+import "../App.css";
 
 const API_URL = "http://localhost:5005";
 
@@ -42,10 +43,14 @@ function LoginPage(props) {
   return (
     <div className="auth-container">
       {!isModalOpen && (
-        <>
+        <div className="auth-callto">
           <h1>Login Page</h1>
-          <button onClick={toggleModal}>Log In</button>
-        </>
+          <button className="callto-button" onClick={toggleModal}>
+            Log In
+          </button>
+          <p>Don't have an account yet?</p>
+          <Link to={"/auth/signup"}> Sign Up</Link>
+        </div>
       )}
 
       {isModalOpen && (
@@ -55,9 +60,9 @@ function LoginPage(props) {
             <span className="close" onClick={toggleModal}>
               &times;
             </span>
-            <h2>Login</h2>
+            <h1>Login</h1>
             <form onSubmit={handleLoginSubmit}>
-              <label>Email:</label>
+              <label>Email</label>
               <input
                 type="email"
                 name="email"
@@ -66,7 +71,7 @@ function LoginPage(props) {
                 required
               />
 
-              <label>Password:</label>
+              <label>Password</label>
               <input
                 type="password"
                 name="password"
@@ -75,7 +80,9 @@ function LoginPage(props) {
                 required
               />
 
-              <button type="submit">Login</button>
+              <button className="auth-button" type="submit">
+                Login
+              </button>
             </form>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
 

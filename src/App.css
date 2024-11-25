@@ -1,8 +1,23 @@
+.raleway-momentum {
+  font-family: "Raleway", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
 #root {
-  background-color: #f7fafd;
+  background-color: #e5e8eb;
   height: 100%;
 }
 body {
   margin: 0;
-  height: 100vw;
+  height: 50vw;
+}
+
+.logo {
+  height: 5vw;
+  width: auto;
+  border-radius: 5%;
+  margin-top: 1vw;
+  margin-left: 1vw;
 }

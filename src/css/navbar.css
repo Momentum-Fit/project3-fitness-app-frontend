@@ -1,7 +1,8 @@
 nav {
-  background-color: #e9eef6;
+  background-color: white;
   display: flex;
   justify-content: space-between;
+  border-bottom: solid #0f82fe6d 0.2rem;
 }
 
 .nav-buttons-container {

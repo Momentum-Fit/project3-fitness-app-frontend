@@ -1,8 +1,9 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../context/auth.context";
 import "../css/auth.css";
+import "../App.css";
 
 const API_URL = "http://localhost:5005";
 
@@ -43,22 +44,26 @@ function SignUpPage(props) {
   return (
     <div className="auth-container">
       {!isModalOpen && (
-        <>
+        <div className="auth-callto">
           <h1>Signup Page</h1>
-          <button onClick={toggleModal}>Sign Up</button>
-        </>
+          <button className="callto-button" onClick={toggleModal}>
+            Sign Up
+          </button>
+          <p>Already have an account?</p>
+          <Link to={"/auth/login"}> Login</Link>
+        </div>
       )}
 
       {isModalOpen && (
-        <div className="modal">
+        <>
           <div className="modal-overlay" onClick={toggleModal}></div>
           <div className="modal-content">
             <span className="close" onClick={toggleModal}>
               &times;
             </span>
-            <h2>Sign Up</h2>
+            <h1>Sign Up</h1>
             <form onSubmit={handleSignupSubmit}>
-              <label>Email:</label>
+              <label>Email</label>
               <input
                 type="email"
                 name="email"
@@ -66,7 +71,7 @@ function SignUpPage(props) {
                 onChange={handleEmail}
                 required
               />
-              <label>Password: </label>
+              <label>Password </label>
               <input
                 type="password"
                 name="password"
@@ -74,7 +79,7 @@ function SignUpPage(props) {
                 onChange={handlePassword}
                 required
               />
-              <label>Name:</label>
+              <label>Name</label>
               <input
                 type="text"
                 name="name"
@@ -82,11 +87,13 @@ function SignUpPage(props) {
                 onChange={handleName}
                 required
               />
-              <button type="submit">Sign Up</button>
+              <button className="auth-button" type="submit">
+                Sign Up
+              </button>
             </form>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
           </div>
-        </div>
+        </>
       )}
     </div>
   );
