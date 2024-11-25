@@ -6,16 +6,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 5rem;
 }
 
 .auth-callto {
   background-color: white;
-  border-radius: 0.2vw;
+  border-radius: 0.5rem;
   width: 30rem;
-  height: 25rem;
+  height: auto;
   margin-top: 4rem;
   text-align: center;
   border: #0f82fe6d solid;
+}
+
+.auth-callto h1 {
+  margin: 0;
+  padding: 2rem;
+  color: #404347;
+  font-size: 2rem;
+  font-weight: 600;
 }
 
 .callto-button {
@@ -44,17 +53,29 @@
   flex-direction: column;
 }
 
-.modal-overlay {
+.auth-container .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 50rem;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
 
-.modal-content {
+.auth-container .modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5rem;
+}
+
+.auth-container .modal-content {
   background-color: #e9eef6;
   padding: 2rem;
   border-radius: 0.2vw;
@@ -63,17 +84,15 @@
   max-width: 80%;
   min-height: 20rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
-  position: relative;
-  margin: 3rem auto;
   border: #0f82fe6d solid;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
-.modal-content input {
+.auth-container .modal-content input {
   margin: 0 0.5rem 1rem 0.5rem;
   color: #404347;
   height: 1.5rem;
@@ -81,16 +100,18 @@
   border: #40434770 solid 0.1rem;
   border-radius: 0.2rem;
 }
-.modal-content input:hover {
+
+.auth-container .modal-content input:hover {
   border: #404347a5 solid 0.1rem;
 }
-.modal-content label {
+
+.auth-container .modal-content label {
   margin: 0 0.5rem 0 0.5rem;
   color: #404347;
   font-weight: 600;
 }
 
-.auth-button {
+.auth-container .auth-button {
   color: #404347;
   height: 3rem;
   width: 12rem;
@@ -100,11 +121,12 @@
   transition: box-shadow 0.3s;
   margin: 1rem 2rem 1rem 2.5rem;
 }
-.auth-button:hover {
+
+.auth-container .auth-button:hover {
   box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
 }
 
-.close {
+.auth-container .close {
   font-size: 30px;
   color: #aaa;
   cursor: pointer;
@@ -113,13 +135,20 @@
   right: 15px;
 }
 
-.close:hover,
-.close:focus {
+.auth-container .close:hover,
+.auth-container .close:focus {
   color: black;
 }
 
-.error-message {
+.auth-container .error-message {
   color: red;
   font-size: 14px;
   margin-top: 10px;
+}
+
+#already-account {
+  border-radius: 0.5rem;
+}
+#no-account {
+  border-radius: 0.5rem;
 }
