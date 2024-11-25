@@ -10,6 +10,7 @@ import ExerciseForm from "./components/ExerciseForm";
 import CreatePlan from "./components/CreatePlan";
 import MyPlan from "./Pages/MyPlan";
 import PlansPage from "./Pages/PlansPage";
+import "./index.css";
 
 function App() {
   return (
