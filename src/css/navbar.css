@@ -6,5 +6,15 @@ nav {
 }
 
 .nav-buttons-container {
-  padding: 2rem;
+  padding: 0.5rem;
+}
+
+nav button {
+  columns: #404347;
+  padding: 1rem;
+}
+
+nav button:hover {
+  background-color: #e5e8eb6a;
+  border-radius: 0.2rem;
 }

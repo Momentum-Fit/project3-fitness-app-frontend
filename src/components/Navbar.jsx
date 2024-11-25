@@ -13,18 +13,17 @@ function Navbar() {
       <img className="logo" src={logo} />
       <div className="nav-buttons-container">
         <Link to="/">
-          <button>home</button>
+          <button id="home-button">Home</button>
         </Link>
         <Link to="/plans">
-          <button>Workout Plans</button>
+          <button id="plans-button">Workout Plans</button>
         </Link>
 
         {isLoggedIn && (
           <>
-            <Link to="/plans">
-              <button>Plans</button>
-            </Link>
-            <button onClick={logOutUser}>Logout</button>
+            <button id="logout-button" onClick={logOutUser}>
+              Logout
+            </button>
             <span>{user && user.name}</span>
           </>
         )}
@@ -33,11 +32,11 @@ function Navbar() {
           <>
             <Link to="/auth/signup">
               {" "}
-              <button>Sign Up</button>{" "}
+              <button id="signup-button">Sign Up</button>{" "}
             </Link>
             <Link to="/auth/login">
               {" "}
-              <button>Login</button>{" "}
+              <button id="login-button">Login</button>{" "}
             </Link>
           </>
         )}
