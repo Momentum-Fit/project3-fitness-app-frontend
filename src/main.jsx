@@ -6,17 +6,22 @@ import { PlansProvider } from "./context/plans.context.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProviderWrapper } from "./context/auth.context.jsx";
 import { ExercisesProvider } from "./context/exercises.context.jsx";
+import { MantineProvider } from "@mantine/core";
+import '@mantine/core/styles.css';
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
-      <AuthProviderWrapper>
-        <PlansProvider>
-          <ExercisesProvider>
-            <App />
-          </ExercisesProvider>
-        </PlansProvider>
-      </AuthProviderWrapper>
+      <MantineProvider>
+        <AuthProviderWrapper>
+          <PlansProvider>
+            <ExercisesProvider>
+              <App />
+            </ExercisesProvider>
+          </PlansProvider>
+        </AuthProviderWrapper>
+      </MantineProvider>
     </BrowserRouter>
   </StrictMode>
 );

@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
 import { PlansContext } from "../context/plans.context";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import CreatePlan from "./CreatePlan";
 import Popup from "./Popup";
+import { AuthContext } from "../context/auth.context";
 
 function Plans() {
+  const isLoggedIn = useContext(AuthContext);
   const { plans, loading, deletePlan } = useContext(PlansContext);
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -30,11 +32,20 @@ function Plans() {
     <>
       <h1>Workout Plans</h1>
       <div>
-      <button onClick={openPopup}>Create New Plan</button>
-      <Popup isOpen={isPopupOpen} onClose={closePopup}>
-        <h2>Create a New Plan</h2>
-        <CreatePlan />
-        </Popup>
+        {isLoggedIn ? (
+          <>
+            <button onClick={openPopup}>Create New Plan</button>
+            <Popup isOpen={isPopupOpen} onClose={closePopup}>
+              <h2>Create a New Plan</h2>
+              <CreatePlan />
+            </Popup>
+          </>
+        ) : (
+          <p>
+            <Link to="/signup">Sign up</Link> or <Link to="/login">log in</Link>{" "}
+            to create a customized plan.
+          </p>
+        )}
       </div>
       <div>
         {plans.length === 0 ? (
