@@ -1,0 +1,13 @@
+footer {
+  border-top: solid #0f82fe6d 0.2rem;
+}
+
+#logo-footer {
+  display: flex;
+}
+
+#logo-footer img {
+  height: 2rem;
+  width: auto;
+  padding-bottom: 0.5rem;
+}

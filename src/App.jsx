@@ -13,6 +13,7 @@ import PlansPage from "./Pages/PlansPage";
 import "./index.css";
 import Footer from "./components/Footer";
 import UserProfilePage from "./Pages/UserProfilePage";
+import About from "./Pages/About";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/plans" element={<PlansPage />} />
         <Route path="/plans/:planId" element={<MyPlan />} />
         <Route path="/profile" element={<UserProfilePage />} />
+        <Route path="/about" element={<About />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Footer />
