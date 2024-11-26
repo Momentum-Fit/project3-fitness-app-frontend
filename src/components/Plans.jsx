@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { PlansContext } from "../context/plans.context";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useParams } from "react-router-dom";
 import CreatePlan from "./CreatePlan";
 import Popup from "./Popup";
 import { AuthContext } from "../context/auth.context";
@@ -8,6 +8,7 @@ import "../App.css";
 import "../css/plans.css";
 
 function Plans() {
+  const { planId } = useParams();
   const { isLoggedIn } = useContext(AuthContext);
   const { plans, loading, deletePlan } = useContext(PlansContext);
   const navigate = useNavigate();
@@ -88,32 +89,34 @@ function Plans() {
         ) : (
           <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
             {plans.map((plan) => (
-              <div
-                key={plan._id}
-                className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl"
-              >
-                <span className="inline-block text-blue-500 dark:text-blue-400"></span>
-                <h1 className="text-xl font-semibold text-gray-700 capitalize dark:text-white">
-                  {plan.name}{" "}
-                </h1>
-                <p className="text-gray-500 dark:text-gray-300">
-                  {plan.description}
-                </p>
-                <p className="text-gray-500 dark:text-gray-300">
-                  {plan.length} week program
-                </p>
-                <p className="text-gray-500 dark:text-gray-300">
-                  {plan.category}
-                </p>
-                {isLoggedIn && (
-                  <button
-                    onClick={() => handleDelete(plan._id)}
-                    className="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
-                  >
-                    Delete
-                  </button>
-                )}
-              </div>
+              <Link to={`http://localhost:5173/plans/${plan._id}`}>
+                <div
+                  key={plan._id}
+                  className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl"
+                >
+                  <span className="inline-block text-blue-500 dark:text-blue-400"></span>
+                  <h1 className="text-xl font-semibold text-gray-700 capitalize dark:text-white">
+                    {plan.name}{" "}
+                  </h1>
+                  <p className="text-gray-500 dark:text-gray-300">
+                    {plan.description}
+                  </p>
+                  <p className="text-gray-500 dark:text-gray-300">
+                    {plan.length} week program
+                  </p>
+                  <p className="text-gray-500 dark:text-gray-300">
+                    {plan.category}
+                  </p>
+                  {isLoggedIn && (
+                    <button
+                      onClick={() => handleDelete(plan._id)}
+                      className="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                    >
+                      Delete
+                    </button>
+                  )}
+                </div>
+              </Link>
             ))}
           </div>
         )}

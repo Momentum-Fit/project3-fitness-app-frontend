@@ -13,6 +13,7 @@ import {
   useCombobox,
 } from "@mantine/core";
 import "../App.css";
+import "../css/popup.css";
 
 function UpdatePlan() {
   const { planId } = useParams();
@@ -88,6 +89,7 @@ function UpdatePlan() {
     <>
       <form onSubmit={handleSubmit}>
         <TextInput
+          id="name-input-pop"
           name="name"
           placeholder="enter name"
           value={name}
@@ -96,6 +98,7 @@ function UpdatePlan() {
           }}
         />
         <TextInput
+          id="desc-input-pop"
           name="description"
           placeholder="enter description"
           value={description}
@@ -113,6 +116,7 @@ function UpdatePlan() {
         >
           <Combobox.Target>
             <InputBase
+              id="cat-input-pop"
               component="button"
               type="button"
               pointer
@@ -145,6 +149,7 @@ function UpdatePlan() {
         >
           <Combobox.Target>
             <InputBase
+              id="length-input-pop"
               component="button"
               type="button"
               pointer
@@ -164,11 +169,12 @@ function UpdatePlan() {
           </Combobox.Dropdown>
         </Combobox>
 
-        <div>
-          <Checkbox.Group label="Select Exercises">
+        <div className="exercises-section-pop">
+          <h3>Select Exercises</h3>
+          <Checkbox.Group>
             {exercises.map((exercise) => (
               <div key={exercise._id}>
-                <label>
+                <label className="exercise-check">
                   <Checkbox
                     value={exercise._id}
                     onChange={(e) =>
@@ -178,12 +184,13 @@ function UpdatePlan() {
                       (selected) => selected.exerciseId === exercise._id
                     )}
                   />
-                  {exercise.name}
+                  <span className="exercise-name-pop">{exercise.name}</span>
                 </label>
                 {selectedExercises.some(
                   (selected) => selected.exerciseId === exercise._id
                 ) && (
                   <Input
+                    id="num-reps"
                     style={{ width: "50px", padding: "4px", fontSize: "14px" }}
                     type="number"
                     min="1"
