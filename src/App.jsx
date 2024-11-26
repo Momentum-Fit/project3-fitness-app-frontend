@@ -16,6 +16,7 @@ import UserProfilePage from "./Pages/UserProfilePage";
 import About from "./Pages/About";
 import NotLoggedIn from "./components/NotLoggedIn";
 import "./css/footer.css";
+import IsPrivate from "./components/IsPrivate";
 
 function App() {
   return (
@@ -27,10 +28,10 @@ function App() {
         <Route path="/auth/signup" element={<SignUpPage />} />
         <Route path="/exercises" element={<ExercisesList />} />
         <Route path="/create-exercise" element={<ExerciseForm />} />
-        <Route path="/createPlan" element={<CreatePlan />} />
+        <Route path="/createPlan" element={<IsPrivate><CreatePlan /></IsPrivate>} />
         <Route path="/plans" element={<PlansPage />} />
-        <Route path="/plans/:planId" element={<MyPlan />} />
-        <Route path="/profile" element={<UserProfilePage />} />
+        <Route path="/plans/:planId" element={<IsPrivate><MyPlan /> </IsPrivate>} />
+        <Route path="/profile" element={<IsPrivate> <UserProfilePage/> </IsPrivate>} />
         <Route path="/about" element={<About />} />
         <Route path="/notloggedin" element={<NotLoggedIn />} />
         <Route path="/*" element={<PageNotFound />} />
