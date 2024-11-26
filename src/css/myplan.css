@@ -1,12 +1,24 @@
 #update-plan-button #create-plan-button {
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 #plan-title title {
   margin-bottom: 1rem;
+  margin-top: 3rem;
 }
 
 #category-length-container {
   width: fit-content;
+  margin-top: 1rem;
 }
 
+.my-plan-subheader {
+  display: flex;
+  justify-content: space-between;
+}
+
+#back-btn {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 1rem;
+}
