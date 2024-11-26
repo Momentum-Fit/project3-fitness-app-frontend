@@ -2,7 +2,7 @@ footer {
   border-top: solid #0f82fe6d 0.2rem;
   height: fit-content;
   width: 100%;
-  position: fixed;
+  position: fix;
   bottom: 0;
 }
 

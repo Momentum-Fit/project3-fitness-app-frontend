@@ -4,9 +4,10 @@ import { useNavigate, Link } from "react-router-dom";
 import CreatePlan from "./CreatePlan";
 import Popup from "./Popup";
 import { AuthContext } from "../context/auth.context";
+import "../App.css";
 
 function Plans() {
-  const {isLoggedIn} = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
   const { plans, loading, deletePlan } = useContext(PlansContext);
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -29,14 +30,14 @@ function Plans() {
   };
 
   return (
-    <>  
-    <h1
-    id="title"
-    className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"
-  >
-    Our Workout Plans
-    <span className="underline decoration-blue-500"></span>
-  </h1>
+    <>
+      <h1
+        id="title"
+        className="bg-#E5E8EB text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"
+      >
+        Our Workout Plans
+        <span className="underline decoration-blue-500"></span>
+      </h1>
       <div>
         {isLoggedIn ? (
           <>
@@ -73,8 +74,8 @@ function Plans() {
           </>
         ) : (
           <p>
-            <Link to="/auth/signup">Sign up</Link> or <Link to="/auth/login">log in</Link>{" "}
-            to create a customized plan.
+            <Link to="/auth/signup">Sign up</Link> or{" "}
+            <Link to="/auth/login">log in</Link> to create a customized plan.
           </p>
         )}
       </div>
@@ -83,23 +84,32 @@ function Plans() {
           <p>No plans available.</p>
         ) : (
           <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
-         {plans.map((plan) => (
-            <div key={plan._id}
-            className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl">
-            <span className="inline-block text-blue-500 dark:text-blue-400"></span>
-            <h1 className="text-xl font-semibold text-gray-700 capitalize dark:text-white">
-              {plan.name} </h1>
-              <p className="text-gray-500 dark:text-gray-300">{plan.description}</p>
-              <p className="text-gray-500 dark:text-gray-300">{plan.length} week program</p>
-              <p className="text-gray-500 dark:text-gray-300">{plan.category}</p>
-              <button className="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-              Delete
-              </button>
-            </div>
-          ))}
-      </div>
+            {plans.map((plan) => (
+              <div
+                key={plan._id}
+                className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl"
+              >
+                <span className="inline-block text-blue-500 dark:text-blue-400"></span>
+                <h1 className="text-xl font-semibold text-gray-700 capitalize dark:text-white">
+                  {plan.name}{" "}
+                </h1>
+                <p className="text-gray-500 dark:text-gray-300">
+                  {plan.description}
+                </p>
+                <p className="text-gray-500 dark:text-gray-300">
+                  {plan.length} week program
+                </p>
+                <p className="text-gray-500 dark:text-gray-300">
+                  {plan.category}
+                </p>
+                <button className="px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
         )}
-    </div>
+      </div>
     </>
   );
 }

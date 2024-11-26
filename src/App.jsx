@@ -15,6 +15,7 @@ import Footer from "./components/Footer";
 import UserProfilePage from "./Pages/UserProfilePage";
 import About from "./Pages/About";
 import NotLoggedIn from "./components/NotLoggedIn";
+import "./css/footer.css";
 import IsPrivate from "./components/IsPrivate";
 
 function App() {

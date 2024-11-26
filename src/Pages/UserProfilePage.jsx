@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import "../App.css";
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
 import service from "../services/fileupload.service";
@@ -6,7 +7,11 @@ import Popup from '../components/Popup';
 
 const UserProfilePage = () => {
   const [about, setAbout] = useState("");
-  const [goals, setGoals] = useState({ weightLoss: false, muscleGain: false, endurance: false });
+  const [goals, setGoals] = useState({
+    weightLoss: false,
+    muscleGain: false,
+    endurance: false,
+  });
   const [height, setHeight] = useState();
   const [weight, setWeight] = useState();
   const [imageUrl, setImageUrl] = useState("");

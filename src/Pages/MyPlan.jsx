@@ -6,6 +6,7 @@ import UpdatePlan from "../components/UpdatePlan";
 import Popup from "../components/Popup";
 import "../css/popup.css";
 import "../css/myplan.css";
+import "../App.css";
 import { AuthContext } from "../context/auth.context";
 import NotLoggedIn from "../components/NotLoggedIn";
 
@@ -64,7 +65,7 @@ function MyPlan() {
         <NotLoggedIn />
       ) : (
         <div>
-          <section className="bg-white dark:bg-gray-900">
+          <section className="bg-#E5E8EB dark:bg-gray-900">
             <div className="container px-6 py-10 mx-auto">
               <div>
                 <button

@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "../css/notloggedin.css";
+import "../App.css";
+
 function NotLoggedIn() {
   const navigate = useNavigate();
   return (

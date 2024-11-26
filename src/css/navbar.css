@@ -19,8 +19,17 @@ nav button:hover {
   background-color: #e5e8eb6a;
   border-radius: 0.2rem;
 }
+.active-button {
+  background-color: #e5e8eb6a;
+  border-radius: 0.2rem;
+}
 
 #user-name {
   color: #005fdc;
   font-weight: 600;
+  padding: 1rem;
+}
+#user-name:hover {
+  background-color: #e5e8eb6a;
+  border-radius: 0.2rem;
 }

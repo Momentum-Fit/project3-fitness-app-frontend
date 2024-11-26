@@ -1,22 +1,35 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "../css/navbar.css";
 import "../App.css";
 import logo from "../assets/logo.jpeg";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const location = useLocation();
+
+  const isActive = (path) => location.pathname === path;
 
   return (
     <nav>
       <img className="logo" src={logo} />
       <div className="nav-buttons-container">
         <Link to="/">
-          <button id="home-button">Home</button>
+          <button
+            id="home-button"
+            className={isActive("/") ? "active-button" : ""}
+          >
+            Home
+          </button>
         </Link>
         <Link to="/plans">
-          <button id="plans-button">Workout Plans</button>
+          <button
+            id="plans-button"
+            className={isActive("/plans") ? "active-button" : ""}
+          >
+            Workout Plans
+          </button>
         </Link>
 
         {isLoggedIn && (
@@ -24,7 +37,9 @@ function Navbar() {
             <button id="logout-button" onClick={logOutUser}>
               Logout
             </button>
-            <span id="user-name"> {user && user.name}</span>
+            <Link to="/profile">
+              <span id="user-name"> {user && user.name}</span>
+            </Link>
           </>
         )}
 
@@ -32,11 +47,21 @@ function Navbar() {
           <>
             <Link to="/auth/signup">
               {" "}
-              <button id="signup-button">Sign Up</button>{" "}
+              <button
+                id="signup-button"
+                className={isActive("/auth/signup") ? "active-button" : ""}
+              >
+                Sign Up
+              </button>{" "}
             </Link>
             <Link to="/auth/login">
               {" "}
-              <button id="login-button">Login</button>{" "}
+              <button
+                id="login-button"
+                className={isActive("/auth/login") ? "active-button" : ""}
+              >
+                Login
+              </button>{" "}
             </Link>
           </>
         )}

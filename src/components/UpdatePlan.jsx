@@ -12,6 +12,7 @@ import {
   InputBase,
   useCombobox,
 } from "@mantine/core";
+import "../App.css";
 
 function UpdatePlan() {
   const { planId } = useParams();
