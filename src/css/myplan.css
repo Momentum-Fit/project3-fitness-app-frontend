@@ -1,11 +1,12 @@
-#update-plan-button {
+#update-plan-button #create-plan-button {
   margin-bottom: 1rem;
 }
 
-#plan-title {
+#plan-title title {
   margin-bottom: 1rem;
 }
 
 #category-length-container {
   width: fit-content;
 }
+

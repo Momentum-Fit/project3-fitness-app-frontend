@@ -2,29 +2,49 @@ import { useContext, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PlansContext } from "../context/plans.context";
 import { ExercisesContext } from "../context/exercises.context";
-
+import {
+  Checkbox,
+  Group,
+  Button,
+  Input,
+  TextInput,
+  Combobox,
+  InputBase,
+  useCombobox,
+} from "@mantine/core";
 
 function UpdatePlan() {
-    const {planId} = useParams();
-    const {plans, updatePlan} = useContext(PlansContext);
-    const { exercises } = useContext(ExercisesContext);
-    const navigate = useNavigate();
-    const updatedPlan = plans.find(plan => plan._id === planId);
-    if (!updatedPlan) {
-        return <div>Plan not found.</div>;
-    }
-   
+  const { planId } = useParams();
+  const { plans, updatePlan } = useContext(PlansContext);
+  const { exercises } = useContext(ExercisesContext);
+  const navigate = useNavigate();
+  const updatedPlan = plans.find((plan) => plan._id === planId);
+  if (!updatedPlan) {
+    return <div>Plan not found.</div>;
+  }
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const closePopup = () => setIsPopupOpen(false);
+
+  const categoryCombobox = useCombobox({
+    onDropdownClose: () => categoryCombobox.resetSelectedOption(),
+  });
+
+  const lengthCombobox = useCombobox({
+    onDropdownClose: () => lengthCombobox.resetSelectedOption(),
+  });
+
   const [name, setName] = useState(updatedPlan.name);
   const [description, setDescription] = useState(updatedPlan.description);
   const [category, setCategory] = useState(updatedPlan.category);
   const [length, setLength] = useState(updatedPlan.length);
-  const [selectedExercises, setSelectedExercises] = useState(updatedPlan.exercises || []);
+  const [selectedExercises, setSelectedExercises] = useState(
+    updatedPlan.exercises || []
+  );
   const [loading, setLoading] = useState(false);
 
   if (!plans || !exercises) return <div>Loading...</div>;
 
-
-    const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const planDetails = {
@@ -38,29 +58,35 @@ function UpdatePlan() {
 
     await updatePlan(planDetails);
     navigate("/");
-};
+  };
 
-    const handleExerciseSelection = (exerciseId, checked) => {
-        if(checked) {
-            setSelectedExercises((prev) => [...prev, {exerciseId, repetitions: 12}])
-        }
-        else {
-            setSelectedExercises((prev) => 
-            prev.filter((exercise) => exercise.exerciseId !== exerciseId))
-        }
-    };
-
-    const handleRepetitionChange = (exerciseId, repetitions) => {
-        setSelectedExercises((prev) => 
-        prev.map((exercise) => 
-        exercise.exerciseId === exerciseId ? {...exercise, repetitions: parseInt(repetitions)} : exercise ))
+  const handleExerciseSelection = (exerciseId, checked) => {
+    if (checked) {
+      setSelectedExercises((prev) => [
+        ...prev,
+        { exerciseId, repetitions: 12 },
+      ]);
+    } else {
+      setSelectedExercises((prev) =>
+        prev.filter((exercise) => exercise.exerciseId !== exerciseId)
+      );
     }
+  };
+
+  const handleRepetitionChange = (exerciseId, repetitions) => {
+    setSelectedExercises((prev) =>
+      prev.map((exercise) =>
+        exercise.exerciseId === exerciseId
+          ? { ...exercise, repetitions: parseInt(repetitions) }
+          : exercise
+      )
+    );
+  };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
+        <TextInput
           name="name"
           placeholder="enter name"
           value={name}
@@ -68,8 +94,7 @@ function UpdatePlan() {
             setName(e.target.value);
           }}
         />
-        <input
-          type="textarea"
+        <TextInput
           name="description"
           placeholder="enter description"
           value={description}
@@ -77,53 +102,108 @@ function UpdatePlan() {
             setDescription(e.target.value);
           }}
         />
-        <select
-          name="category"
-          value={category}
-          onChange={(e) => {
-            setCategory(e.target.value);
+        <Combobox
+          store={categoryCombobox}
+          withinPortal={false}
+          onOptionSubmit={(val) => {
+            setCategory(val);
+            categoryCombobox.closeDropdown();
           }}
         >
-          <option value="strength">Strength</option>
-          <option value="hiit">HIIT</option>
-          <option value="low impact">Low Impact</option>
-          <option value="cardio">Cardio</option>
-        </select>
-        <select
-          name="length"
-          value={length}
-          onChange={(e) => {
-            setLength(e.target.value);
-          }}>
-          <option value="4">4 weeks</option>
-          <option value="8">8 weeks</option>
-          <option value="12">12 weeks</option>
-        </select>
+          <Combobox.Target>
+            <InputBase
+              component="button"
+              type="button"
+              pointer
+              rightSection={<Combobox.Chevron />}
+              onClick={() => categoryCombobox.toggleDropdown()}
+              rightSectionPointerEvents="none"
+            >
+              {category || (
+                <Input.Placeholder>Select Category</Input.Placeholder>
+              )}
+            </InputBase>
+          </Combobox.Target>
+          <Combobox.Dropdown>
+            <Combobox.Options>
+              <Combobox.Option value="hiit">HIIT</Combobox.Option>
+              <Combobox.Option value="strength">Strength</Combobox.Option>
+              <Combobox.Option value="low impact">Low Impact</Combobox.Option>
+              <Combobox.Option value="cardio">Cardio</Combobox.Option>
+            </Combobox.Options>
+          </Combobox.Dropdown>
+        </Combobox>
+
+        <Combobox
+          store={lengthCombobox}
+          withinPortal={false}
+          onOptionSubmit={(val) => {
+            setLength(val);
+            lengthCombobox.closeDropdown();
+          }}
+        >
+          <Combobox.Target>
+            <InputBase
+              component="button"
+              type="button"
+              pointer
+              rightSection={<Combobox.Chevron />}
+              onClick={() => lengthCombobox.toggleDropdown()}
+              rightSectionPointerEvents="none"
+            >
+              {length || <Input.Placeholder>Select Duration</Input.Placeholder>}
+            </InputBase>
+          </Combobox.Target>
+          <Combobox.Dropdown>
+            <Combobox.Options>
+              <Combobox.Option value="4">4 weeks</Combobox.Option>
+              <Combobox.Option value="8">8 weeks</Combobox.Option>
+              <Combobox.Option value="12">12 weeks</Combobox.Option>
+            </Combobox.Options>
+          </Combobox.Dropdown>
+        </Combobox>
+
         <div>
-            <h3>Select Exercises for your Plan</h3>
+          <Checkbox.Group label="Select Exercises">
             {exercises.map((exercise) => (
-                <div key={exercise._id}>
+              <div key={exercise._id}>
                 <label>
-                    <input type="checkbox" value={exercise._id} onChange={(e) => handleExerciseSelection(exercise._id, e.target.checked)} 
-                    checked={selectedExercises.some((selected) => selected.exerciseId === exercise._id)} />
-                    {exercise.name}
+                  <Checkbox
+                    value={exercise._id}
+                    onChange={(e) =>
+                      handleExerciseSelection(exercise._id, e.target.checked)
+                    }
+                    checked={selectedExercises.some(
+                      (selected) => selected.exerciseId === exercise._id
+                    )}
+                  />
+                  {exercise.name}
                 </label>
-                {selectedExercises.some((selected) => selected.exerciseId === exercise._id) && (
-                  <input
+                {selectedExercises.some(
+                  (selected) => selected.exerciseId === exercise._id
+                ) && (
+                  <Input
+                    style={{ width: "50px", padding: "4px", fontSize: "14px" }}
                     type="number"
                     min="1"
                     value={
-                      selectedExercises.find((selected) => selected.exerciseId === exercise._id).repetitions
+                      selectedExercises.find(
+                        (selected) => selected.exerciseId === exercise._id
+                      ).repetitions
                     }
-                    onChange={(e) => handleRepetitionChange(exercise._id, e.target.value)}
+                    onChange={(e) =>
+                      handleRepetitionChange(exercise._id, e.target.value)
+                    }
                   />
                 )}
               </div>
-            ))
-            }
-                </div>
+            ))}
+          </Checkbox.Group>
+        </div>
 
-        <button>Update My Plan</button>
+        <Button filled onClick={closePopup}>
+          Update My Plan
+        </Button>
       </form>
     </>
   );

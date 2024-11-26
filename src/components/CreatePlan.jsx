@@ -8,7 +8,6 @@ import {
   Button,
   Input,
   TextInput,
-  Select,
   Combobox,
   InputBase,
   useCombobox,
@@ -31,7 +30,6 @@ function CreatePlan() {
 
   const closePopup = () => setIsPopupOpen(false);
 
-
   const categoryCombobox = useCombobox({
     onDropdownClose: () => categoryCombobox.resetSelectedOption(),
   });
@@ -48,7 +46,9 @@ function CreatePlan() {
     e.preventDefault();
 
     if (!name || !category || !length || selectedExercises.length === 0) {
-      alert("Please fill all required fields and select at least one exercise.");
+      alert(
+        "Please fill all required fields and select at least one exercise."
+      );
       return;
     }
 
@@ -178,43 +178,46 @@ function CreatePlan() {
         </Combobox>
 
         <div>
-        <Checkbox.Group label="Select Exercises for your Plan">
-        {exercises.map((exercise) => (
-          <div key={exercise._id}>
-            <label>
-              <Checkbox
-                value={exercise._id}
-                onChange={(e) =>
-                  handleExerciseSelection(exercise._id, e.target.checked)
-                }
-                checked={selectedExercises.some(
+          <Checkbox.Group label="Select Exercises for your Plan">
+            {exercises.map((exercise) => (
+              <div key={exercise._id}>
+                <label>
+                  <Checkbox
+                    value={exercise._id}
+                    onChange={(e) =>
+                      handleExerciseSelection(exercise._id, e.target.checked)
+                    }
+                    checked={selectedExercises.some(
+                      (selected) => selected.exerciseId === exercise._id
+                    )}
+                  />
+                  {exercise.name}
+                </label>
+                {selectedExercises.some(
                   (selected) => selected.exerciseId === exercise._id
+                ) && (
+                  <Input
+                    style={{ width: "50px", padding: "4px", fontSize: "14px" }}
+                    type="number"
+                    min="1"
+                    value={
+                      selectedExercises.find(
+                        (selected) => selected.exerciseId === exercise._id
+                      ).repetitions
+                    }
+                    onChange={(e) =>
+                      handleRepetitionChange(exercise._id, e.target.value)
+                    }
+                  />
                 )}
-              />
-              {exercise.name}
-            </label>
-            {selectedExercises.some(
-              (selected) => selected.exerciseId === exercise._id
-            ) && (
-              <Input
-                type="number"
-                min="1"
-                value={
-                  selectedExercises.find(
-                    (selected) => selected.exerciseId === exercise._id
-                  ).repetitions
-                }
-                onChange={(e) =>
-                  handleRepetitionChange(exercise._id, e.target.value)
-                }
-              />
-            )}
-          </div>
-        ))}
-      </Checkbox.Group>
+              </div>
+            ))}
+          </Checkbox.Group>
         </div>
 
-        <Button type="submit" filled onClick={closePopup}>Create Plan</Button>
+        <Button filled onClick={closePopup}>
+          Create Plan
+        </Button>
       </form>
     </>
   );
