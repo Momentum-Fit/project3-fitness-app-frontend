@@ -1,0 +1,21 @@
+.plans-container {
+  margin: 1rem;
+  margin-bottom: 3rem;
+}
+
+.plans-container h1 {
+  margin-top: 2.5rem;
+}
+
+.plans-pg-head {
+  display: flex;
+  justify-content: space-between;
+}
+
+.auth-text {
+  margin-top: 3rem;
+}
+
+.auth-text a {
+  color: #3b81f6;
+}

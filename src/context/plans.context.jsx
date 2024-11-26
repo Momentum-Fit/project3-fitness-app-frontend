@@ -101,7 +101,7 @@ const PlansProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${storedToken}` },
         }
       );
-      setPlans((prevPlans) => prevPlans.filter((plan) => plan._id === planId));
+      setPlans((prevPlans) => prevPlans.filter((plan) => plan._id !== planId));
       console.log(response.data.message);
     } catch (error) {
       console.log(error, "error deleting plan");
