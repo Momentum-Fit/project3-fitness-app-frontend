@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  height: 100%;
+}
+
 .raleway-momentum {
   font-family: "Raleway", serif;
   font-optical-sizing: auto;

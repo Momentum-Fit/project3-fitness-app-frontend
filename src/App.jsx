@@ -14,6 +14,7 @@ import "./index.css";
 import Footer from "./components/Footer";
 import UserProfilePage from "./Pages/UserProfilePage";
 import About from "./Pages/About";
+import NotLoggedIn from "./components/NotLoggedIn";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/plans/:planId" element={<MyPlan />} />
         <Route path="/profile" element={<UserProfilePage />} />
         <Route path="/about" element={<About />} />
+        <Route path="/notloggedin" element={<NotLoggedIn />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Footer />
