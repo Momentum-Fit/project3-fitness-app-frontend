@@ -65,7 +65,7 @@ function MyPlan() {
         <NotLoggedIn />
       ) : (
         <div>
-          <section className="bg-white dark:bg-gray-900">
+          <section className="bg-#E5E8EB dark:bg-gray-900">
             <div className="container px-6 py-10 mx-auto">
               <div>
                 <button

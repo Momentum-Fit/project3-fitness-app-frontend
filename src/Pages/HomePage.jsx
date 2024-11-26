@@ -3,7 +3,7 @@ import "../App.css";
 function HomePage() {
   return (
     <>
-      <section className="bg-white dark:bg-gray-900">
+      <section className="bg-#E5E8EB dark:bg-gray-900">
         <div className="container px-6 py-12 mx-auto">
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
             <div>

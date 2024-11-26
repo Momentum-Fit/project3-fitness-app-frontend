@@ -33,7 +33,7 @@ function Plans() {
     <>
       <h1
         id="title"
-        className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"
+        className="bg-#E5E8EB text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"
       >
         Our Workout Plans
         <span className="underline decoration-blue-500"></span>
