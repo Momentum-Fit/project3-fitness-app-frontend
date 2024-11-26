@@ -59,7 +59,7 @@ function UpdatePlan() {
     };
 
     await updatePlan(planDetails);
-    navigate("/");
+    navigate(`/plans/${planId}`);
   };
 
   const handleExerciseSelection = (exerciseId, checked) => {
@@ -87,7 +87,7 @@ function UpdatePlan() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={() => handleSubmit(planId)}>
         <TextInput
           id="name-input-pop"
           name="name"
@@ -209,7 +209,7 @@ function UpdatePlan() {
           </Checkbox.Group>
         </div>
 
-        <Button filled onClick={closePopup}>
+        <Button type="submit" filled onClick={closePopup}>
           Update My Plan
         </Button>
       </form>
