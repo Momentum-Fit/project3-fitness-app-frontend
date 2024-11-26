@@ -6,6 +6,7 @@ import UpdatePlan from "../components/UpdatePlan";
 import Popup from "../components/Popup";
 import "../css/popup.css";
 import "../css/myplan.css";
+import "../App.css";
 import { AuthContext } from "../context/auth.context";
 import NotLoggedIn from "../components/NotLoggedIn";
 

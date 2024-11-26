@@ -1,3 +1,4 @@
+import "../App.css";
 function About() {
   return (
     <section id="not-found-bg" class="bg-#E5E8EB dark:bg-gray-900 ">

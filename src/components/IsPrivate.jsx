@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import "../App.css";
 
 function IsPrivate({ children }) {
   const { isLoggedIn, isLoading } = useContext(AuthContext);

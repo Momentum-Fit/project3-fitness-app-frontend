@@ -12,6 +12,7 @@ import {
   InputBase,
   useCombobox,
 } from "@mantine/core";
+import "../App.css";
 
 function CreatePlan() {
   const [name, setName] = useState("");

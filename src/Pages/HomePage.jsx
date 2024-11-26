@@ -1,3 +1,5 @@
+import "../App.css";
+
 function HomePage() {
   return (
     <>
@@ -66,7 +68,8 @@ function HomePage() {
       <section className="bg-white dark:bg-gray-900">
         <div className="container px-6 py-10 mx-auto">
           <h1 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white">
-            explore our featured <span className="underline decoration-blue-500">Workout plans</span>
+            explore our featured{" "}
+            <span className="underline decoration-blue-500">Workout plans</span>
           </h1>
 
           <p className="mt-4 text-gray-500 xl:mt-6 dark:text-gray-300">
@@ -328,7 +331,7 @@ function HomePage() {
       <section className="bg-white dark:bg-gray-900">
         <div className="container px-6 py-10 mx-auto">
           <h1 className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
-          Start Tracking
+            Start Tracking
             <span className="text-blue-500"> your Progress</span> today!
           </h1>
 
@@ -469,8 +472,6 @@ function HomePage() {
           </div>
         </div>
       </section>
-
-     
     </>
   );
 }
