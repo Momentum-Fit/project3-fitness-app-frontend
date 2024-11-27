@@ -24,7 +24,7 @@ const ExercisesProvider = ({ children }) => {
 
     const getPlans = async () => {
       try {
-        const response = await axios.get("http://localhost:5005/api/plans");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/plans`);
         console.log("Fetched plans:", response.data);
         setPlans(response.data);
       } catch (error) {
@@ -70,7 +70,7 @@ const ExercisesProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5005/api/plans/${planId}`,
+        `${import.meta.env.VITE_API_URL}/api/plans/${planId}`,
         { exerciseId: exerciseId, repetitions: repetitions },
         {
           headers: { Authorization: `Bearer ${storedToken}` },
