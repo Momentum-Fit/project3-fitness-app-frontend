@@ -12,7 +12,9 @@ const ExercisesProvider = ({ children }) => {
   useEffect(() => {
     const getExercises = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/exercises`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/exercises`
+        );
         setExercises(response.data);
       } catch (error) {
         console.log("Error fetching exercises:", error);
@@ -24,8 +26,9 @@ const ExercisesProvider = ({ children }) => {
 
     const getPlans = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/plans`);
-        console.log("Fetched plans:", response.data);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/plans`
+        );
         setPlans(response.data);
       } catch (error) {
         console.log("Error fetching plans:", error);
@@ -76,7 +79,7 @@ const ExercisesProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${storedToken}` },
         }
       );
-      console.log("Exercise assigned to plan:", response.data);
+      console.log("Exercise assigned to plan:");
 
       setPlans((prevPlans) =>
         prevPlans.map((plan) =>
