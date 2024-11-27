@@ -11,6 +11,7 @@ import {
   InputBase,
   useCombobox,
 } from "@mantine/core";
+import axios from "axios";
 
 function CreateExercise() {
   const { planId } = useParams();
@@ -18,13 +19,13 @@ function CreateExercise() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(null);
   const [difficulty, setDifficulty] = useState(null);
+  const navigate = useNavigate();
 
-  const { exercises, createExercise } = useContext(ExercisesContext);
+  const { exercises, createExercise, assignExerciseToPlan } =
+    useContext(ExercisesContext);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const closePopup = () => setIsPopupOpen(false);
-
-  const navigate = useNavigate();
 
   const categoryCombobox = useCombobox({
     onDropdownClose: () => categoryCombobox.resetSelectedOption(),
@@ -38,9 +39,7 @@ function CreateExercise() {
     e.preventDefault();
 
     if (!name || !description || !category || !difficulty) {
-      alert(
-        "Please fill all required fields and select at least one exercise."
-      );
+      alert("Please fill all required fields.");
       return;
     }
 
@@ -49,19 +48,24 @@ function CreateExercise() {
       description: description,
       category: category,
       difficulty: difficulty,
+      //include repetitions
     };
 
-    await createExercise(exerciseDetails);
+    try {
+      const createdExercise = await createExercise(exerciseDetails);
+      //                                                  CHANGE 12 TO createExercise.repetitions
+      await assignExerciseToPlan(createdExercise._id, planId, 12);
 
-    setName("");
-    setDescription("");
-    setCategory("");
-    setDifficulty("");
-
-    closePopup();
-
-    navigate(`/plans/${planId}`);
+      setName("");
+      setDescription("");
+      setCategory("");
+      setDifficulty("");
+    } catch (error) {
+      console.error("Error creating or assigning exercise:", error);
+      alert("An error occurred while creating or assigning the exercise.");
+    }
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -69,17 +73,13 @@ function CreateExercise() {
           name="name"
           placeholder="Enter exercise name"
           value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
+          onChange={(e) => setName(e.target.value)}
         />
         <TextInput
           name="description"
           placeholder="Enter a Description"
           value={description}
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <Combobox
           store={categoryCombobox}
@@ -143,9 +143,12 @@ function CreateExercise() {
             </Combobox.Options>
           </Combobox.Dropdown>
         </Combobox>
-        <Button type="submit">Add exercise</Button>
+        <Button type="submit" onClick={closePopup}>
+          Add exercise
+        </Button>
       </form>
     </>
   );
 }
+
 export default CreateExercise;
