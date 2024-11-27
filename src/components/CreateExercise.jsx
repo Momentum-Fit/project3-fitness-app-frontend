@@ -20,6 +20,7 @@ function CreateExercise() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(null);
   const [difficulty, setDifficulty] = useState(null);
+  const [repetitions, setRepetitions] = useState("");
   const navigate = useNavigate();
 
   const { exercises, createExercise, assignExerciseToPlan } =
@@ -49,18 +50,21 @@ function CreateExercise() {
       description: description,
       category: category,
       difficulty: difficulty,
-      //include repetitions
+      repetitions: repetitions,
     };
 
     try {
       const createdExercise = await createExercise(exerciseDetails);
       //                                                  CHANGE 12 TO createExercise.repetitions
-      await assignExerciseToPlan(createdExercise._id, planId, 12);
+      await assignExerciseToPlan(createdExercise._id, planId, repetitions);
+
+      console.log(repetitions);
 
       setName("");
       setDescription("");
       setCategory("");
       setDifficulty("");
+      setRepetitions("");
       
       setIsPopupOpen(false);
     } catch (error) {
@@ -146,6 +150,12 @@ function CreateExercise() {
             </Combobox.Options>
           </Combobox.Dropdown>
         </Combobox>
+        <TextInput
+          name="repetitions"
+          placeholder="Enter number of repetitions"
+          value={repetitions}
+          onChange={(e) => setRepetitions(e.target.value)}
+        />
         <Button type="submit" onClick={closePopup}>
           Add exercise
         </Button>
