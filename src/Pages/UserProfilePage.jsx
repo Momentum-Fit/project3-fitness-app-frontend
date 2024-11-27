@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "../App.css";
 import { useContext } from 'react';
 import { AuthContext } from '../context/auth.context';
-import service from "../services/fileupload.service";
+import { updateUserProfile, uploadImage } from "../services/fileupload.service";
 import Popup from '../components/Popup';
+import { UserContext } from '../context/user.context';
 
 const UserProfilePage = () => {
+  const { user, updateUserProfile } = useContext(UserContext);
   const [about, setAbout] = useState("");
   const [goals, setGoals] = useState({
     weightLoss: false,
@@ -17,24 +19,32 @@ const UserProfilePage = () => {
   const [imageUrl, setImageUrl] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const { isLoggedIn, user } = useContext(AuthContext);
+  const { isLoggedIn } = useContext(AuthContext);
 
-  const handleFileUpload = e => {
+  const handleFileUpload = async (e) => {
     const uploadData = new FormData();
 
     uploadData.append("imageUrl", e.target.files[0]);
 
-    service
-      .uploadImage(uploadData)
-      .then(response => {
-        setImageUrl(response.filter);
-      })
-      .catch(err => console.log("Error while uploading the file", err));
+    try {
+      const response = await uploadImage(uploadData);
+      setImageUrl(response.imageUrl);
+    } catch (err) {
+      console.log("error uploading file", err)
+    }
   }
 
-  const handleSaveProfile = () => {
+  const handleSaveProfile = async () => {
+    const updatedData = {
+      height, 
+      weight,
+      about, 
+      goals, 
+      imageUrl,
+    };
+
+    updateUserProfile(updatedData);
     setIsPopupOpen(false);
-    alert("Profile updated successfully!")
   };
 
   return (
@@ -121,5 +131,6 @@ const UserProfilePage = () => {
     </>
   );
 };
+
 
 export default UserProfilePage;

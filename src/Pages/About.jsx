@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import { useContext } from "react";
