@@ -6,7 +6,6 @@ import HomePage from "./Pages/HomePage";
 import ExercisesList from "./components/ExercisesList";
 import Navbar from "./components/Navbar";
 import PageNotFound from "./Pages/PageNotFound";
-import ExerciseForm from "./components/ExerciseForm";
 import CreatePlan from "./components/CreatePlan";
 import MyPlan from "./Pages/MyPlan";
 import PlansPage from "./Pages/PlansPage";
@@ -17,6 +16,7 @@ import About from "./Pages/About";
 import NotLoggedIn from "./components/NotLoggedIn";
 import "./css/footer.css";
 import IsPrivate from "./components/IsPrivate";
+import CreateExercise from "./components/CreateExercise";
 
 function App() {
   return (
@@ -27,13 +27,35 @@ function App() {
         <Route path="/auth/login" element={<LoginPage />} />
         <Route path="/auth/signup" element={<SignUpPage />} />
         <Route path="/exercises" element={<ExercisesList />} />
-        <Route path="/create-exercise" element={<ExerciseForm />} />
-        <Route path="/createPlan" element={<IsPrivate><CreatePlan /></IsPrivate>} />
+        <Route
+          path="/createPlan"
+          element={
+            <IsPrivate>
+              <CreatePlan />
+            </IsPrivate>
+          }
+        />
         <Route path="/plans" element={<PlansPage />} />
-        <Route path="/plans/:planId" element={<IsPrivate><MyPlan /> </IsPrivate>} />
-        <Route path="/profile" element={<IsPrivate> <UserProfilePage/> </IsPrivate>} />
+        <Route
+          path="/plans/:planId"
+          element={
+            <IsPrivate>
+              <MyPlan />{" "}
+            </IsPrivate>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <IsPrivate>
+              {" "}
+              <UserProfilePage />{" "}
+            </IsPrivate>
+          }
+        />
         <Route path="/about" element={<About />} />
         <Route path="/notloggedin" element={<NotLoggedIn />} />
+        <Route path="/create-exercise" element={<CreateExercise />} />
         <Route path="/*" element={<PageNotFound />} />
       </Routes>
       <Footer />

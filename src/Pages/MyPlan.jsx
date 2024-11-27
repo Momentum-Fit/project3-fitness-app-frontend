@@ -9,6 +9,7 @@ import "../css/myplan.css";
 import "../App.css";
 import { AuthContext } from "../context/auth.context";
 import NotLoggedIn from "../components/NotLoggedIn";
+import CreateExercise from "../components/CreateExercise";
 
 function MyPlan() {
   const { planId } = useParams();
@@ -20,7 +21,9 @@ function MyPlan() {
   const [plan, setPlan] = useState(null);
   const [planLoading, setPlanLoading] = useState(true);
   const [exercises, setExercises] = useState([]);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [isUpdatePopupOpen, setIsUpdatePopupOpen] = useState(false);
+  const [isCreateExercisePopupOpen, setIsCreateExercisePopupOpen] =
+    useState(false);
 
   useEffect(() => {
     const getPlan = async () => {
@@ -53,12 +56,20 @@ function MyPlan() {
   if (loading || planLoading)
     return <div className="text-center">Loading...</div>;
 
-  const openPopup = () => {
-    setIsPopupOpen(true);
+  const openUpdatePopup = () => {
+    setIsUpdatePopupOpen(true);
   };
 
-  const closePopup = () => {
-    setIsPopupOpen(false);
+  const closeUpdatePopup = () => {
+    setIsUpdatePopupOpen(false);
+  };
+
+  const openCreateExercisePopup = () => {
+    setIsCreateExercisePopupOpen(true);
+  };
+
+  const closeCreateExercisePopup = () => {
+    setIsCreateExercisePopupOpen(false);
   };
 
   return (
@@ -111,7 +122,7 @@ function MyPlan() {
                 <div>
                   <button
                     id="update-plan-button"
-                    onClick={openPopup}
+                    onClick={openUpdatePopup}
                     className="flex items-center px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                   >
                     <svg
@@ -129,9 +140,23 @@ function MyPlan() {
 
                     <span className="mx-1">Update My Plan</span>
                   </button>
-                  <Popup isOpen={isPopupOpen} onClose={closePopup}>
+                  <Popup isOpen={isUpdatePopupOpen} onClose={closeUpdatePopup}>
                     <h2>Update My Plan</h2>
                     <UpdatePlan />
+                  </Popup>
+                  <button
+                    id="add-exercise"
+                    onClick={openCreateExercisePopup}
+                    className="flex items-center px-4 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                  >
+                    <span className="mx-1">Add Exercise</span>
+                  </button>
+                  <Popup
+                    isOpen={isCreateExercisePopupOpen}
+                    onClose={closeCreateExercisePopup}
+                  >
+                    <h2>Add exercise</h2>
+                    <CreateExercise />
                   </Popup>
                 </div>
               </div>

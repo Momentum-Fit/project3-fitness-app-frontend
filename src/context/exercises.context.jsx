@@ -6,6 +6,7 @@ const ExercisesContext = React.createContext();
 const ExercisesProvider = ({ children }) => {
   const [exercises, setExercises] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getExercises = async () => {
@@ -22,8 +23,29 @@ const ExercisesProvider = ({ children }) => {
     getExercises();
   }, []);
 
+  const createExercise = async (exerciseData) => {
+    const storedToken = localStorage.getItem("authToken");
+    if (!storedToken) {
+      setError("User is not authenticated.");
+      return;
+    }
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5005/api/exercises",
+        exerciseData,
+        {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        }
+      );
+      setExercises((prevExercises) => [...prevExercises, response.data]);
+    } catch (error) {
+      setError("Failed to create exercise.");
+    }
+  };
+
   return (
-    <ExercisesContext.Provider value={{ exercises, loading }}>
+    <ExercisesContext.Provider value={{ exercises, loading, createExercise }}>
       {children}
     </ExercisesContext.Provider>
   );
