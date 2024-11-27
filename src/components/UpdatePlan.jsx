@@ -171,9 +171,9 @@ function UpdatePlan() {
 
         <div className="exercises-section-pop">
           <h3>Select Exercises</h3>
-          <Checkbox.Group>
+          <Checkbox.Group label="Select Exercises for your Plan">
             {exercises.map((exercise) => (
-              <div key={exercise._id}>
+              <div key={exercise._id} className="exercise-checkbox-container">
                 <label className="exercise-check">
                   <Checkbox
                     value={exercise._id}
@@ -189,6 +189,7 @@ function UpdatePlan() {
                 {selectedExercises.some(
                   (selected) => selected.exerciseId === exercise._id
                 ) && (
+                  <div className="repetition-input-container">
                   <Input
                     id="num-reps"
                     style={{ width: "50px", padding: "4px", fontSize: "14px" }}
@@ -203,6 +204,7 @@ function UpdatePlan() {
                       handleRepetitionChange(exercise._id, e.target.value)
                     }
                   />
+                  </div>
                 )}
               </div>
             ))}
