@@ -13,6 +13,7 @@ import {
   useCombobox,
 } from "@mantine/core";
 import "../App.css";
+import "../css/popup.css";
 
 function CreatePlan() {
   const [name, setName] = useState("");
@@ -102,6 +103,7 @@ function CreatePlan() {
     <>
       <form onSubmit={handleSubmit}>
         <TextInput
+          id="name-input-pop"
           name="name"
           placeholder="Enter a Name"
           value={name}
@@ -110,6 +112,7 @@ function CreatePlan() {
           }}
         />
         <TextInput
+          id="desc-input-pop"
           name="description"
           placeholder="Enter a Description"
           value={description}
@@ -127,6 +130,7 @@ function CreatePlan() {
         >
           <Combobox.Target>
             <InputBase
+              id="cat-input-pop"
               component="button"
               type="button"
               pointer
@@ -159,6 +163,7 @@ function CreatePlan() {
         >
           <Combobox.Target>
             <InputBase
+              id="length-input-pop"
               component="button"
               type="button"
               pointer
@@ -178,11 +183,12 @@ function CreatePlan() {
           </Combobox.Dropdown>
         </Combobox>
 
-        <div>
+        <div className="exercises-section-pop">
+        <h3>Select Exercises</h3>
           <Checkbox.Group label="Select Exercises for your Plan">
             {exercises.map((exercise) => (
-              <div key={exercise._id}>
-                <label>
+              <div key={exercise._id} className="exercise-checkbox-container">
+                <label className="exercise-check">
                   <Checkbox
                     value={exercise._id}
                     onChange={(e) =>
@@ -192,11 +198,12 @@ function CreatePlan() {
                       (selected) => selected.exerciseId === exercise._id
                     )}
                   />
-                  {exercise.name}
+                  <span className="exercise-name-pop">{exercise.name}</span>
                 </label>
                 {selectedExercises.some(
                   (selected) => selected.exerciseId === exercise._id
                 ) && (
+                  <div className="repetition-input-container">
                   <Input
                     style={{ width: "50px", padding: "4px", fontSize: "14px" }}
                     type="number"
@@ -210,6 +217,7 @@ function CreatePlan() {
                       handleRepetitionChange(exercise._id, e.target.value)
                     }
                   />
+                  </div>
                 )}
               </div>
             ))}
