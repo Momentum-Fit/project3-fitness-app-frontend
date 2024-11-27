@@ -224,7 +224,7 @@ function CreatePlan() {
           </Checkbox.Group>
         </div>
 
-        <Button filled onClick={closePopup}>
+        <Button type="submit" onClick={closePopup}>
           Create Plan
         </Button>
       </form>

@@ -11,7 +11,7 @@ const ExercisesProvider = ({ children }) => {
   useEffect(() => {
     const getExercises = async () => {
       try {
-        const response = await axios.get("http://localhost:5005/api/exercises");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/exercises`);
         setExercises(response.data);
       } catch (error) {
         console.log("error fetching exercises", error);
@@ -32,7 +32,7 @@ const ExercisesProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5005/api/exercises",
+        `${import.meta.env.VITE_API_URL}/api/exercises`,
         exerciseData,
         {
           headers: { Authorization: `Bearer ${storedToken}` },

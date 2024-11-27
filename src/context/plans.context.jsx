@@ -11,7 +11,7 @@ const PlansProvider = ({ children }) => {
   useEffect(() => {
     const getPlans = async () => {
       try {
-        const response = await axios.get("http://localhost:5005/api/plans");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/plans`);
         setPlans(response.data);
       } catch (error) {
         console.log("error fetching plans", error);
@@ -26,7 +26,7 @@ const PlansProvider = ({ children }) => {
     const storedToken = localStorage.getItem("authToken");
     try {
       const response = await axios.get(
-        `http://localhost:5005/api/plans/${planId}`,
+        `${import.meta.env.VITE_API_URL}/api/plans/${planId}`,
         {
           headers: { Authorization: `Bearer ${storedToken}` },
         }
@@ -46,7 +46,7 @@ const PlansProvider = ({ children }) => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5005/api/plans",
+        `${import.meta.env.VITE_API_URL}/api/plans`,
         planData,
         {
           headers: { Authorization: `Bearer ${storedToken}` },
@@ -70,7 +70,7 @@ const PlansProvider = ({ children }) => {
 
     try {
       const response = await axios.patch(
-        `http://localhost:5005/api/plans/${updatedPlan._id}`,
+        `${import.meta.env.VITE_API_URL}/api/plans/${updatedPlan._id}`,
         updatedPlan,
         { headers: { Authorization: `Bearer ${storedToken}` } }
       );
@@ -96,7 +96,7 @@ const PlansProvider = ({ children }) => {
 
     try {
       const response = await axios.delete(
-        `http://localhost:5005/api/plans/${planId}`,
+        `${import.meta.env.VITE_API_URL}/api/plans/${planId}`,
         {
           headers: { Authorization: `Bearer ${storedToken}` },
         }

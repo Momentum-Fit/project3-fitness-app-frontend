@@ -6,8 +6,6 @@ import "../css/auth.css";
 import "../App.css";
 import logo from "../assets/logo.jpeg";
 
-const API_URL = "http://localhost:5005";
-
 function LoginPage(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,7 +23,7 @@ function LoginPage(props) {
     const requestBody = { email, password };
 
     axios
-      .post(`${API_URL}/auth/login`, requestBody)
+      .post(`${import.meta.env.VITE_API_URL}/auth/login`, requestBody)
       .then((response) => {
         const token = response.data.authToken;
         storeToken(token);

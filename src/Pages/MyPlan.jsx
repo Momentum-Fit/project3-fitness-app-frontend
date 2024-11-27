@@ -34,7 +34,7 @@ function MyPlan() {
         const exerciseDetails = await Promise.all(
           fetchedPlan.exercises.map(async (exercise) => {
             const response = await axios.get(
-              `http://localhost:5005/api/exercises/${exercise.exerciseId}`,
+              `${import.meta.env.VITE_API_URL}/api/exercises/${exercise.exerciseId}`,
               {
                 headers: { Authorization: `Bearer ${storedToken}` },
               }

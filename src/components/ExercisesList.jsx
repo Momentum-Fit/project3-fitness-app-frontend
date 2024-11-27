@@ -2,14 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "../App.css";
 
-const API_URL = "http://localhost:5005";
-
 function ExercisesList() {
   const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/api/exercises`)
+      .get(`${import.meta.env.VITE_API_URL}/api/exercises`)
       .then((response) => {
         const reverseNewResponse = response.data.reverse();
         setExercises(reverseNewResponse);
