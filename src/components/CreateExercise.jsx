@@ -12,6 +12,7 @@ import {
   useCombobox,
 } from "@mantine/core";
 import axios from "axios";
+import "../css/popup.css";
 
 function CreateExercise() {
   const { planId } = useParams();
@@ -74,18 +75,21 @@ function CreateExercise() {
     <>
       <form onSubmit={handleSubmit}>
         <TextInput
+          className="create-ex-input"
           name="name"
           placeholder="Enter exercise name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <TextInput
+          className="create-ex-input"
           name="description"
           placeholder="Enter a Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <Combobox
+          className="create-ex-input"
           store={categoryCombobox}
           withinPortal={false}
           onOptionSubmit={(val) => {
@@ -118,6 +122,7 @@ function CreateExercise() {
           </Combobox.Dropdown>
         </Combobox>
         <Combobox
+          className="create-ex-input"
           store={difficultyCombobox}
           withinPortal={false}
           onOptionSubmit={(val) => {
@@ -153,7 +158,7 @@ function CreateExercise() {
           value={repetitions}
           onChange={(e) => setRepetitions(e.target.value)}
         />
-        <Button type="submit" onClick={closePopup}>
+        <Button className="create-ex-btn" type="submit" onClick={closePopup}>
           Add exercise
         </Button>
       </form>

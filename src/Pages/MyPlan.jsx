@@ -10,6 +10,7 @@ import "../App.css";
 import { AuthContext } from "../context/auth.context";
 import NotLoggedIn from "../components/NotLoggedIn";
 import CreateExercise from "../components/CreateExercise";
+import "../css/popup.css";
 
 function MyPlan() {
   const { planId } = useParams();
@@ -36,7 +37,9 @@ function MyPlan() {
           fetchedPlan.exercises.map(async (exercise) => {
             console.log(exercise.exerciseId);
             const response = await axios.get(
-              `${import.meta.env.VITE_API_URL}/api/exercises/${exercise.exerciseId}`,
+              `${import.meta.env.VITE_API_URL}/api/exercises/${
+                exercise.exerciseId
+              }`,
               {
                 headers: { Authorization: `Bearer ${storedToken}` },
               }
@@ -157,7 +160,7 @@ function MyPlan() {
                     isOpen={isCreateExercisePopupOpen}
                     onClose={closeCreateExercisePopup}
                   >
-                    <h2>Add exercise</h2>
+                    <h2 className="create-ex-title">Add exercise</h2>
                     <CreateExercise />
                   </Popup>
                 </div>
