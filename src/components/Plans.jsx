@@ -20,7 +20,13 @@ function Plans() {
       duration: 4000,
       position: "bottom-right",
     });
-    console.log("the toast appeared");
+  };
+
+  const createdPlanToast = () => {
+    toast.success("Plan was created successfully!", {
+      duration: 4000,
+      position: "bottom-right",
+    });
   };
 
   const handleDelete = async (planId) => {
@@ -83,7 +89,11 @@ function Plans() {
 
                           <span className="mx-1">Create customized Plan</span>
                         </button>
-                        <Popup isOpen={isPopupOpen} onClose={closePopup}>
+                        <Popup
+                          isOpen={isPopupOpen}
+                          onClose={closePopup}
+                          createdPlanToast={createdPlanToast}
+                        >
                           <h2>Create a New Plan</h2>
                           <CreatePlan />
                         </Popup>

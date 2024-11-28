@@ -75,6 +75,7 @@ function CreatePlan(props) {
 
     props.onClose();
 
+    props.createdPlanToast();
     navigate("/plans");
   };
 
