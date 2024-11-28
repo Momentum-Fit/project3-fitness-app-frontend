@@ -27,6 +27,13 @@ function MyPlan() {
     useState(false);
 
   const updatedPlanToast = () => {
+    toast.success("Exercise was created successfully!", {
+      duration: 4000,
+      position: "bottom-right",
+    });
+  };
+
+  const createdExerciseToast = () => {
     toast.success("Plan was updated successfully!", {
       duration: 4000,
       position: "bottom-right",
@@ -170,6 +177,7 @@ function MyPlan() {
                     isOpen={isCreateExercisePopupOpen}
                     onClose={closeCreateExercisePopup}
                     getPlan={getPlan}
+                    createdExerciseToast={createdExerciseToast}
                   >
                     <h2 className="create-ex-title">Add exercise</h2>
                     <CreateExercise />

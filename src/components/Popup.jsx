@@ -9,6 +9,7 @@ const Popup = ({
   getPlan,
   createdPlanToast,
   updatedPlanToast,
+  createdExerciseToast,
 }) => {
   // if popup closed, return null
   if (!isOpen) return null;
@@ -20,6 +21,7 @@ const Popup = ({
       getPlan: getPlan,
       createdPlanToast: createdPlanToast,
       updatedPlanToast: updatedPlanToast,
+      createdExerciseToast: createdExerciseToast,
     })
   );
 
