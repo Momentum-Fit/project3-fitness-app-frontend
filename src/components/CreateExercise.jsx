@@ -67,6 +67,7 @@ function CreateExercise(props) {
       setRepetitions("");
 
       props.onClose(); // close popup
+      props.getPlan();
     } catch (error) {
       console.error("Error creating or assigning exercise:", error);
       alert("An error occurred while creating or assigning the exercise.");

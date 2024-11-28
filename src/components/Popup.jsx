@@ -2,13 +2,13 @@ import "../css/popup.css";
 import "../App.css";
 import React from "react";
 
-const Popup = ({ isOpen, onClose, children }) => {
+const Popup = ({ isOpen, onClose, children, getPlan }) => {
   // if popup closed, return null
   if (!isOpen) return null;
 
   // Clone children and pass extra props
-  const childrenWithOnClose = React.Children.map(children, (child) =>
-    React.cloneElement(child, { onClose: onClose })
+  const childrenWithProps = React.Children.map(children, (child) =>
+    React.cloneElement(child, { onClose: onClose, getPlan: getPlan })
   );
 
   return (
@@ -17,7 +17,7 @@ const Popup = ({ isOpen, onClose, children }) => {
         <button className="popup-close-btn" onClick={onClose}>
           Close
         </button>
-        {childrenWithOnClose}
+        {childrenWithProps}
       </div>
     </div>
   );
