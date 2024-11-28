@@ -15,7 +15,7 @@ import {
 import "../App.css";
 import "../css/popup.css";
 
-function UpdatePlan() {
+function UpdatePlan(props) {
   const { planId } = useParams();
   const { plans, updatePlan } = useContext(PlansContext);
   const { exercises } = useContext(ExercisesContext);
@@ -60,6 +60,7 @@ function UpdatePlan() {
 
     await updatePlan(planDetails);
     navigate(`/plans/${planId}`);
+    props.onClose();
   };
 
   const handleExerciseSelection = (exerciseId, checked) => {
@@ -87,7 +88,7 @@ function UpdatePlan() {
 
   return (
     <>
-      <form onSubmit={() => handleSubmit(planId)}>
+      <form onSubmit={handleSubmit}>
         <TextInput
           id="name-input-pop"
           name="name"
