@@ -55,7 +55,7 @@ function CreateExercise(props) {
 
     try {
       const createdExercise = await createExercise(exerciseDetails);
-      //                                                  CHANGE 12 TO createExercise.repetitions
+
       await assignExerciseToPlan(createdExercise._id, planId, repetitions);
 
       setName("");
@@ -64,7 +64,8 @@ function CreateExercise(props) {
       setDifficulty("");
       setRepetitions("");
 
-      props.onClose(); // close popup
+      props.onClose();
+      props.createdExerciseToast();
       props.getPlan();
     } catch (error) {
       console.error("Error creating or assigning exercise:", error);

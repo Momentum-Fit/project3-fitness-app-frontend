@@ -2,13 +2,27 @@ import "../css/popup.css";
 import "../App.css";
 import React from "react";
 
-const Popup = ({ isOpen, onClose, children, getPlan }) => {
+const Popup = ({
+  isOpen,
+  onClose,
+  children,
+  getPlan,
+  createdPlanToast,
+  updatedPlanToast,
+  createdExerciseToast,
+}) => {
   // if popup closed, return null
   if (!isOpen) return null;
 
   // Clone children and pass extra props
   const childrenWithProps = React.Children.map(children, (child) =>
-    React.cloneElement(child, { onClose: onClose, getPlan: getPlan })
+    React.cloneElement(child, {
+      onClose: onClose,
+      getPlan: getPlan,
+      createdPlanToast: createdPlanToast,
+      updatedPlanToast: updatedPlanToast,
+      createdExerciseToast: createdExerciseToast,
+    })
   );
 
   return (
