@@ -3,6 +3,12 @@
   margin-bottom: 3rem;
 }
 
+#blue-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .plans-pg-head {
   display: flex;
   justify-content: space-between;
@@ -10,6 +16,10 @@
 
 .auth-text {
   margin-top: 3rem;
+}
+
+#create-plan-container-btn {
+  padding: 0;
 }
 
 .auth-text a {

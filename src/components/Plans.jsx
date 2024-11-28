@@ -48,7 +48,10 @@ function Plans() {
               {isLoggedIn ? (
                 <>
                   <section className="bg-#E5E8EB dark:bg-gray-900">
-                    <div className="container px-6 py-10 mx-auto">
+                    <div
+                      id="create-plan-container-btn"
+                      className="container px-6 py-10 mx-auto"
+                    >
                       <div>
                         <button
                           onClick={openPopup}
@@ -103,31 +106,38 @@ function Plans() {
                   to={`http://localhost:5173/plans/${plan._id}`}
                   key={plan._id}
                 >
-                  <div className="p-8 space-y-3 h-[500px] border-2 border-blue-400 dark:border-blue-300 rounded-xl flex flex-col">
-                    <span className="inline-block text-blue-500 dark:text-blue-400"></span>
-                    <h1 className="text-xl font-semibold text-gray-700 capitalize dark:text-white">
-                      {plan.name}
-                    </h1>
-                    <p className="text-gray-500 dark:text-gray-300">
-                      {plan.description}
-                    </p>
-                    <p className="text-gray-500 dark:text-gray-300 font-bold">
-                      {plan.length} week program
-                    </p>
-                    <p className="text-gray-500 dark:text-gray-300 font-bold">
-                      {plan.category.toUpperCase()}
-                    </p>
+                  <div
+                    id="blue-container"
+                    className="p-8 space-y-3 h-[500px] border-2 border-blue-400 dark:border-blue-300 rounded-xl flex flex-col"
+                  >
+                    <div className="top-section-container">
+                      <span className="inline-block text-blue-500 dark:text-blue-400"></span>
+                      <h1 className="text-xl font-semibold text-gray-700 capitalize dark:text-white">
+                        {plan.name}
+                      </h1>
+                      <p className="text-gray-500 dark:text-gray-300">
+                        {plan.description}
+                      </p>
+                      <p className="text-gray-500 dark:text-gray-300 font-bold">
+                        {plan.length} week program
+                      </p>
+                      <p className="text-gray-500 dark:text-gray-300 font-bold">
+                        {plan.category.toUpperCase()}
+                      </p>
+                    </div>
 
-                    {isLoggedIn && (
-                      <div className="mt-4 space-y-4">
-                        <button
-                          onClick={() => handleDelete(plan._id)}
-                          className="w-full px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    )}
+                    <div>
+                      {isLoggedIn && (
+                        <div className="mt-4 space-y-4">
+                          <button
+                            onClick={() => handleDelete(plan._id)}
+                            className="w-full px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </Link>
               ))}
