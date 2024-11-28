@@ -35,9 +35,8 @@ function Plans() {
     <section className="bg-#E5E8EB dark:bg-gray-900">
       <div>
         <div className="container px-6 py-10 mx-auto">
-          <a
+          <Link to="/plans"
             id="back-btn"
-            href="http://localhost:5173/plans"
             className="flex items-center justify-center px-1 py-2 text-gray-500 capitalize bg-white rounded-md cursor-not-allowed dark:bg-gray-800 dark:text-gray-600"
           >
             <svg
@@ -52,7 +51,7 @@ function Plans() {
                 clipRule="evenodd"
               />
             </svg>
-          </a>
+          </Link>
           <h1
             id="title"
             className="bg-#E5E8EB text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"
@@ -111,7 +110,7 @@ function Plans() {
             <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
               {plans.map((plan) => (
                 <Link
-                  to={`http://localhost:5173/plans/${plan._id}`}
+                  to={`/plans/${plan._id}`}
                   key={plan._id}
                 >
                   <div className="p-8 space-y-3 border-2 border-blue-400 dark:border-blue-300 rounded-xl flex flex-col">

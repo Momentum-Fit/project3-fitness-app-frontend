@@ -115,10 +115,6 @@ function HomePage() {
                   full-body workouts.
                 </p>
 
-                <a
-                  href="#"
-                  className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
-                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-6 h-6"
@@ -133,7 +129,6 @@ function HomePage() {
                       d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                </a>
               </div>
             </Link>
             <Link to="plans/673f021fee14f1ad8482208a">
@@ -164,10 +159,6 @@ function HomePage() {
                   mixed with strength exercises for muscle definition.
                 </p>
 
-                <a
-                  href="#"
-                  className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
-                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-6 h-6"
@@ -182,7 +173,6 @@ function HomePage() {
                       d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                </a>
               </div>
             </Link>
             <Link to="/plans/673f0394ee14f1ad8482210a">
@@ -213,10 +203,6 @@ function HomePage() {
                   muscle and power.
                 </p>
 
-                <a
-                  href="#"
-                  className="inline-flex p-2 text-blue-500 capitalize transition-colors duration-300 transform bg-blue-100 rounded-full rtl:-scale-x-100 dark:bg-blue-500 dark:text-white hover:underline hover:text-blue-600 dark:hover:text-blue-500"
-                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="w-6 h-6"
@@ -231,7 +217,6 @@ function HomePage() {
                       d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                </a>
               </div>
             </Link>
           </div>
@@ -270,8 +255,7 @@ function HomePage() {
 
               <p className="text-gray-500 dark:text-gray-300">120</p>
 
-              <a
-                href="/plans"
+              <Link to="/plans"
                 className="flex items-center -mx-1 text-sm text-blue-500 capitalize transition-colors duration-300 transform dark:text-blue-400 hover:underline hover:text-blue-600 dark:hover:text-blue-500"
               >
                 <span className="mx-1">Get started now</span>
@@ -287,7 +271,7 @@ function HomePage() {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-              </a>
+              </Link>
             </div>
 
             <div className="flex flex-col items-center p-6 space-y-3 text-center bg-gray-100 rounded-xl dark:bg-gray-800">
@@ -320,8 +304,7 @@ function HomePage() {
 
               <p className="text-gray-500 dark:text-gray-300">5000</p>
 
-              <a
-                href="/about"
+              <Link to="/about"
                 className="flex items-center -mx-1 text-sm text-blue-500 capitalize transition-colors duration-300 transform dark:text-blue-400 hover:underline hover:text-blue-600 dark:hover:text-blue-500"
               >
                 <span className="mx-1">Learn More About Momentum Fit</span>
@@ -337,7 +320,7 @@ function HomePage() {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-              </a>
+              </Link>
             </div>
 
             <div className="flex flex-col items-center p-6 space-y-3 text-center bg-gray-100 rounded-xl dark:bg-gray-800">
@@ -366,8 +349,7 @@ function HomePage() {
                 Beginner - Intermediate - Advanced
               </p>
 
-              <a
-                href="/auth/signup"
+              <Link to="/auth/signup"
                 className="flex items-center -mx-1 text-sm text-blue-500 capitalize transition-colors duration-300 transform dark:text-blue-400 hover:underline hover:text-blue-600 dark:hover:text-blue-500"
               >
                 <span className="mx-1">Sign up Today & Customize a Workout Plan</span>
@@ -383,7 +365,7 @@ function HomePage() {
                     clipRule="evenodd"
                   ></path>
                 </svg>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
