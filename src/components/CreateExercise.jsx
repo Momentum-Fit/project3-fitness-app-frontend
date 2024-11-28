@@ -12,6 +12,7 @@ import {
   useCombobox,
 } from "@mantine/core";
 import axios from "axios";
+import "../css/popup.css";
 
 function CreateExercise() {
   const { planId } = useParams();
@@ -60,6 +61,8 @@ function CreateExercise() {
       setDescription("");
       setCategory("");
       setDifficulty("");
+      
+      setIsPopupOpen(false);
     } catch (error) {
       console.error("Error creating or assigning exercise:", error);
       alert("An error occurred while creating or assigning the exercise.");
