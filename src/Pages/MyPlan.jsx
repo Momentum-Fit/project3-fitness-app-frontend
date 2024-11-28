@@ -10,6 +10,7 @@ import "../App.css";
 import { AuthContext } from "../context/auth.context";
 import NotLoggedIn from "../components/NotLoggedIn";
 import CreateExercise from "../components/CreateExercise";
+import toast, { Toaster } from "react-hot-toast";
 
 function MyPlan() {
   const { planId } = useParams();
@@ -24,6 +25,13 @@ function MyPlan() {
   const [isUpdatePopupOpen, setIsUpdatePopupOpen] = useState(false);
   const [isCreateExercisePopupOpen, setIsCreateExercisePopupOpen] =
     useState(false);
+
+  const updatedPlanToast = () => {
+    toast.success("Plan was updated successfully!", {
+      duration: 4000,
+      position: "bottom-right",
+    });
+  };
 
   const getPlan = async () => {
     const storedToken = localStorage.getItem("authToken");
@@ -146,6 +154,7 @@ function MyPlan() {
                     isOpen={isUpdatePopupOpen}
                     onClose={closeUpdatePopup}
                     getPlan={getPlan}
+                    updatedPlanToast={updatedPlanToast}
                   >
                     <h2>Update My Plan</h2>
                     <UpdatePlan />

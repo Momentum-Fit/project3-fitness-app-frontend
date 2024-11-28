@@ -2,7 +2,14 @@ import "../css/popup.css";
 import "../App.css";
 import React from "react";
 
-const Popup = ({ isOpen, onClose, children, getPlan, createdPlanToast }) => {
+const Popup = ({
+  isOpen,
+  onClose,
+  children,
+  getPlan,
+  createdPlanToast,
+  updatedPlanToast,
+}) => {
   // if popup closed, return null
   if (!isOpen) return null;
 
@@ -12,6 +19,7 @@ const Popup = ({ isOpen, onClose, children, getPlan, createdPlanToast }) => {
       onClose: onClose,
       getPlan: getPlan,
       createdPlanToast: createdPlanToast,
+      updatedPlanToast: updatedPlanToast,
     })
   );
 

@@ -61,6 +61,7 @@ function UpdatePlan(props) {
     await updatePlan(planDetails);
     navigate(`/plans/${planId}`);
     props.onClose();
+    props.updatedPlanToast();
   };
 
   const handleExerciseSelection = (exerciseId, checked) => {
