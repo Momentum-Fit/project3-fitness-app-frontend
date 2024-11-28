@@ -29,7 +29,6 @@ function CreatePlan() {
   const navigate = useNavigate();
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-
   const closePopup = () => setIsPopupOpen(false);
 
   const categoryCombobox = useCombobox({

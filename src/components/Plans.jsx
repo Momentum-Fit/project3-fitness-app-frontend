@@ -132,12 +132,7 @@ function Plans() {
                     {/* Add margin-top to the button container to ensure it doesn't overlap */}
                     {isLoggedIn && (
                       <div className="mt-4 space-y-4">
-                        <button
-                          onClick={() => handleSelectPlan(plan._id)}
-                          className="w-full px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-green-600 rounded-lg hover:bg-green-500 focus:outline-none focus:ring focus:ring-green-300 focus:ring-opacity-80"
-                        >
-                          Select this Workout Plan
-                        </button>
+                        
                         <button
                           onClick={() => handleDelete(plan._id)}
                           className="w-full px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
