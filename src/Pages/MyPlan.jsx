@@ -158,7 +158,7 @@ function MyPlan() {
                     onClose={closeCreateExercisePopup}
                     getPlan={getPlan}
                   >
-                    <h2>Add exercise</h2>
+                    <h2 className="create-ex-title">Add exercise</h2>
                     <CreateExercise />
                   </Popup>
                 </div>
