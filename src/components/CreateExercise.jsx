@@ -58,8 +58,6 @@ function CreateExercise() {
       //                                                  CHANGE 12 TO createExercise.repetitions
       await assignExerciseToPlan(createdExercise._id, planId, repetitions);
 
-      console.log(repetitions);
-
       setName("");
       setDescription("");
       setCategory("");

@@ -53,7 +53,6 @@ const PlansProvider = ({ children }) => {
         }
       );
       setPlans((prevPlans) => [...prevPlans, response.data]);
-      console.log("Plan created:", response.data);
     } catch (error) {
       console.log("Error creating plan:", error);
       setError("Failed to create plan.");
@@ -80,7 +79,6 @@ const PlansProvider = ({ children }) => {
           plan._id === updatedPlan._id ? response.data : plan
         )
       );
-      console.log("Plan updated:", response.data);
     } catch (error) {
       console.error("Error updating plan:", error);
       setError("Failed to update plan.");
@@ -102,7 +100,6 @@ const PlansProvider = ({ children }) => {
         }
       );
       setPlans((prevPlans) => prevPlans.filter((plan) => plan._id !== planId));
-      console.log(response.data.message);
     } catch (error) {
       console.log(error, "error deleting plan");
     }
