@@ -76,18 +76,21 @@ function CreateExercise(props) {
     <>
       <form onSubmit={handleSubmit}>
         <TextInput
+          className="create-ex-input"
           name="name"
           placeholder="Enter exercise name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
         <TextInput
+          className="create-ex-input"
           name="description"
           placeholder="Enter a Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
         <Combobox
+          className="create-ex-input"
           store={categoryCombobox}
           withinPortal={false}
           onOptionSubmit={(val) => {
@@ -120,6 +123,7 @@ function CreateExercise(props) {
           </Combobox.Dropdown>
         </Combobox>
         <Combobox
+          className="create-ex-input"
           store={difficultyCombobox}
           withinPortal={false}
           onOptionSubmit={(val) => {
@@ -155,7 +159,9 @@ function CreateExercise(props) {
           value={repetitions}
           onChange={(e) => setRepetitions(e.target.value)}
         />
-        <Button type="submit">Add exercise</Button>
+        <Button className="create-ex-btn" type="submit">
+          Add exercise
+        </Button>
       </form>
     </>
   );

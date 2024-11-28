@@ -142,7 +142,11 @@ function MyPlan() {
 
                     <span className="mx-1">Update My Plan</span>
                   </button>
-                  <Popup isOpen={isUpdatePopupOpen} onClose={closeUpdatePopup}>
+                  <Popup
+                    isOpen={isUpdatePopupOpen}
+                    onClose={closeUpdatePopup}
+                    getPlan={getPlan}
+                  >
                     <h2>Update My Plan</h2>
                     <UpdatePlan />
                   </Popup>
@@ -158,7 +162,7 @@ function MyPlan() {
                     onClose={closeCreateExercisePopup}
                     getPlan={getPlan}
                   >
-                    <h2>Add exercise</h2>
+                    <h2 className="create-ex-title">Add exercise</h2>
                     <CreateExercise />
                   </Popup>
                 </div>
