@@ -6,6 +6,7 @@ import Popup from "./Popup";
 import { AuthContext } from "../context/auth.context";
 import "../App.css";
 import "../css/plans.css";
+import toast, { Toaster } from "react-hot-toast";
 
 function Plans() {
   const { planId } = useParams();
@@ -14,8 +15,17 @@ function Plans() {
   const navigate = useNavigate();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  const deleteToast = () => {
+    toast.success("Plan was deleted successfully!", {
+      duration: 4000,
+      position: "bottom-right",
+    });
+    console.log("the toast appeared");
+  };
+
   const handleDelete = async (planId) => {
     await deletePlan(planId);
+    deleteToast();
     navigate("/plans");
   };
 

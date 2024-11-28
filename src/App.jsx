@@ -17,11 +17,13 @@ import NotLoggedIn from "./components/NotLoggedIn";
 import "./css/footer.css";
 import IsPrivate from "./components/IsPrivate";
 import CreateExercise from "./components/CreateExercise";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <>
       <Navbar />
+      <Toaster />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/auth/login" element={<LoginPage />} />
