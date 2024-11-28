@@ -14,7 +14,7 @@ import {
 import axios from "axios";
 import "../css/popup.css";
 
-function CreateExercise() {
+function CreateExercise(props) {
   const { planId } = useParams();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -63,8 +63,9 @@ function CreateExercise() {
       setCategory("");
       setDifficulty("");
       setRepetitions("");
-      
-      setIsPopupOpen(false);
+
+      props.onClose(); // close popup
+      props.getPlan();
     } catch (error) {
       console.error("Error creating or assigning exercise:", error);
       alert("An error occurred while creating or assigning the exercise.");
@@ -154,9 +155,7 @@ function CreateExercise() {
           value={repetitions}
           onChange={(e) => setRepetitions(e.target.value)}
         />
-        <Button type="submit" onClick={closePopup}>
-          Add exercise
-        </Button>
+        <Button type="submit">Add exercise</Button>
       </form>
     </>
   );

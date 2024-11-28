@@ -1,8 +1,15 @@
 import "../css/popup.css";
 import "../App.css";
+import React from "react";
 
-const Popup = ({ isOpen, onClose, children }) => {
+const Popup = ({ isOpen, onClose, children, getPlan }) => {
+  // if popup closed, return null
   if (!isOpen) return null;
+
+  // Clone children and pass extra props
+  const childrenWithProps = React.Children.map(children, (child) =>
+    React.cloneElement(child, { onClose: onClose, getPlan: getPlan })
+  );
 
   return (
     <div className="popup-overlay" onClick={onClose}>
@@ -10,7 +17,7 @@ const Popup = ({ isOpen, onClose, children }) => {
         <button className="popup-close-btn" onClick={onClose}>
           Close
         </button>
-        {children}
+        {childrenWithProps}
       </div>
     </div>
   );

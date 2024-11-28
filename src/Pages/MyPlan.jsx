@@ -25,31 +25,33 @@ function MyPlan() {
   const [isCreateExercisePopupOpen, setIsCreateExercisePopupOpen] =
     useState(false);
 
-  useEffect(() => {
-    const getPlan = async () => {
-      const storedToken = localStorage.getItem("authToken");
-      try {
-        const fetchedPlan = await getPlanById(planId);
-        setPlan(fetchedPlan);
-        const exerciseDetails = await Promise.all(
-          fetchedPlan.exercises.map(async (exercise) => {
-            const response = await axios.get(
-              `${import.meta.env.VITE_API_URL}/api/exercises/${exercise.exerciseId}`,
-              {
-                headers: { Authorization: `Bearer ${storedToken}` },
-              }
-            );
-            return { ...exercise, details: response.data };
-          })
-        );
-        setExercises(exerciseDetails);
-      } catch (error) {
-        console.error("Error fetching specific plan:", error);
-      } finally {
-        setPlanLoading(false);
-      }
-    };
+  const getPlan = async () => {
+    const storedToken = localStorage.getItem("authToken");
+    try {
+      const fetchedPlan = await getPlanById(planId);
+      setPlan(fetchedPlan);
+      const exerciseDetails = await Promise.all(
+        fetchedPlan.exercises.map(async (exercise) => {
+          const response = await axios.get(
+            `${import.meta.env.VITE_API_URL}/api/exercises/${
+              exercise.exerciseId
+            }`,
+            {
+              headers: { Authorization: `Bearer ${storedToken}` },
+            }
+          );
+          return { ...exercise, details: response.data };
+        })
+      );
+      setExercises(exerciseDetails);
+    } catch (error) {
+      console.error("Error fetching specific plan:", error);
+    } finally {
+      setPlanLoading(false);
+    }
+  };
 
+  useEffect(() => {
     getPlan();
   }, [planId, getPlanById]);
 
@@ -154,6 +156,7 @@ function MyPlan() {
                   <Popup
                     isOpen={isCreateExercisePopupOpen}
                     onClose={closeCreateExercisePopup}
+                    getPlan={getPlan}
                   >
                     <h2>Add exercise</h2>
                     <CreateExercise />
