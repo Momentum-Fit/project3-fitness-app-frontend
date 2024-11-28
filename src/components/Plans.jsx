@@ -96,9 +96,9 @@ function Plans() {
                 </section>
               </>
             ) : (
-              <p className="auth-text">
-                <Link to="/auth/signup">Sign up</Link> or{" "}
-                <Link to="/auth/login">Log in</Link> to create a customized
+              <p className="text-gray-500 dark:text-gray-300">
+                <Link to="/auth/signup" style={{color: "#3b81f6"}}>Sign up</Link> or{" "}
+                <Link to="/auth/login" style={{color: "#3b81f6"}}>Log in</Link> to create a customized
                 plan.
               </p>
             )}

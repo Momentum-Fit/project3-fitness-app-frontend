@@ -31,10 +31,8 @@ function MyPlan() {
       try {
         const fetchedPlan = await getPlanById(planId);
         setPlan(fetchedPlan);
-        console.log("Fetched plan exercises:", fetchedPlan.exercises);
         const exerciseDetails = await Promise.all(
           fetchedPlan.exercises.map(async (exercise) => {
-            console.log(exercise.exerciseId);
             const response = await axios.get(
               `${import.meta.env.VITE_API_URL}/api/exercises/${exercise.exerciseId}`,
               {

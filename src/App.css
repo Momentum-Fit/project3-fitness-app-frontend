@@ -43,3 +43,7 @@ body {
 .plans-container {
   background-color: #e5e8eb;
 }
+
+.dark p {
+  color: rgb(176, 174, 174);
+}

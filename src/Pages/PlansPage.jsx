@@ -3,7 +3,7 @@ import "../App.css";
 
 function PlansPage() {
   return (
-    <div className="plans-container">
+    <div>
       <Plans />
     </div>
   );
