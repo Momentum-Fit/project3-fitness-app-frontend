@@ -35,7 +35,7 @@ export const UserProvider = ({ children }) => {
         throw new Error("No auth token found.")
     }
     try {
-      const res = await api.put(`/auth/users/${user._id}`, updatedData, {
+      const res = await api.put(`/auth/users`, updatedData, {
         headers: {Authorization: `Bearer ${token}`}
       });
       setUser(res.data); 
