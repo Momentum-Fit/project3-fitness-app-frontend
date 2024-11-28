@@ -190,20 +190,24 @@ function UpdatePlan() {
                   (selected) => selected.exerciseId === exercise._id
                 ) && (
                   <div className="repetition-input-container">
-                  <Input
-                    id="num-reps"
-                    style={{ width: "50px", padding: "4px", fontSize: "14px" }}
-                    type="number"
-                    min="1"
-                    value={
-                      selectedExercises.find(
-                        (selected) => selected.exerciseId === exercise._id
-                      ).repetitions
-                    }
-                    onChange={(e) =>
-                      handleRepetitionChange(exercise._id, e.target.value)
-                    }
-                  />
+                    <Input
+                      id="num-reps"
+                      style={{
+                        width: "50px",
+                        padding: "4px",
+                        fontSize: "14px",
+                      }}
+                      type="number"
+                      min="1"
+                      value={
+                        selectedExercises.find(
+                          (selected) => selected.exerciseId === exercise._id
+                        ).repetitions
+                      }
+                      onChange={(e) =>
+                        handleRepetitionChange(exercise._id, e.target.value)
+                      }
+                    />
                   </div>
                 )}
               </div>

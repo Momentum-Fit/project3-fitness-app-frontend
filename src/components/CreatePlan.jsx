@@ -15,7 +15,7 @@ import {
 import "../App.css";
 import "../css/popup.css";
 
-function CreatePlan() {
+function CreatePlan(props) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState(null);
@@ -73,7 +73,9 @@ function CreatePlan() {
     setSelectedExercises([]);
     setRepetitions(12);
 
-    navigate("/");
+    props.onClose();
+
+    navigate("/plans");
   };
 
   const handleExerciseSelection = (exerciseId, checked) => {
@@ -183,7 +185,7 @@ function CreatePlan() {
         </Combobox>
 
         <div className="exercises-section-pop">
-        <h3>Select Exercises</h3>
+          <h3>Select Exercises</h3>
           <Checkbox.Group label="Select Exercises for your Plan">
             {exercises.map((exercise) => (
               <div key={exercise._id} className="exercise-checkbox-container">
@@ -203,19 +205,23 @@ function CreatePlan() {
                   (selected) => selected.exerciseId === exercise._id
                 ) && (
                   <div className="repetition-input-container">
-                  <Input
-                    style={{ width: "50px", padding: "4px", fontSize: "14px" }}
-                    type="number"
-                    min="1"
-                    value={
-                      selectedExercises.find(
-                        (selected) => selected.exerciseId === exercise._id
-                      ).repetitions
-                    }
-                    onChange={(e) =>
-                      handleRepetitionChange(exercise._id, e.target.value)
-                    }
-                  />
+                    <Input
+                      style={{
+                        width: "50px",
+                        padding: "4px",
+                        fontSize: "14px",
+                      }}
+                      type="number"
+                      min="1"
+                      value={
+                        selectedExercises.find(
+                          (selected) => selected.exerciseId === exercise._id
+                        ).repetitions
+                      }
+                      onChange={(e) =>
+                        handleRepetitionChange(exercise._id, e.target.value)
+                      }
+                    />
                   </div>
                 )}
               </div>

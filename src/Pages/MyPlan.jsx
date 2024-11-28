@@ -142,7 +142,11 @@ function MyPlan() {
 
                     <span className="mx-1">Update My Plan</span>
                   </button>
-                  <Popup isOpen={isUpdatePopupOpen} onClose={closeUpdatePopup}>
+                  <Popup
+                    isOpen={isUpdatePopupOpen}
+                    onClose={closeUpdatePopup}
+                    getPlan={getPlan}
+                  >
                     <h2>Update My Plan</h2>
                     <UpdatePlan />
                   </Popup>
