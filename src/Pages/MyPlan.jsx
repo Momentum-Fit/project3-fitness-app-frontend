@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { PlansContext } from "../context/plans.context";
 import axios from "axios";
@@ -97,9 +97,8 @@ function MyPlan() {
         <div>
           <section className="bg-#E5E8EB dark:bg-gray-900">
             <div className="container px-6 py-10 mx-auto">
-              <a
+              <Link to="/plans"
                 id="back-btn"
-                href="http://localhost:5173/plans"
                 className="flex items-center justify-center px-1 py-2 text-gray-500 capitalize bg-white rounded-md cursor-not-allowed dark:bg-gray-800 dark:text-gray-600"
               >
                 <svg
@@ -114,7 +113,7 @@ function MyPlan() {
                     clipRule="evenodd"
                   />
                 </svg>
-              </a>
+              </Link>
               <h1
                 id="plan-title"
                 className="text-2xl font-semibold text-gray-800 capitalize lg:text-3xl dark:text-white"

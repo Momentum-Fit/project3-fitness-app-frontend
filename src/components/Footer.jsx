@@ -1,6 +1,7 @@
 import logo from "../assets/logo.jpeg";
 import "../css/footer.css";
 import "../App.css";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -12,12 +13,11 @@ function Footer() {
         </a>
 
         <div className="flex flex-wrap items-center justify-center gap-4 mt-6 lg:gap-6 lg:mt-0">
-          <a
-            href="http://localhost:5173/about"
+          <Link to="/about"
             className="text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400"
           >
             About
-          </a>
+          </Link>
           <a
             href="https://github.com/Momentum-Fit"
             target="_blank"
@@ -31,12 +31,11 @@ function Footer() {
           >
             LinkedIn
           </a>
-          <a
-            href="http://localhost:5173/about"
+          <Link to="/about"
             className="text-sm text-gray-600 transition-colors duration-300 dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400"
           >
             Contact
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

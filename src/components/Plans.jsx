@@ -123,7 +123,7 @@ function Plans() {
             <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 md:grid-cols-2 xl:grid-cols-3">
               {plans.map((plan) => (
                 <Link
-                  to={`http://localhost:5173/plans/${plan._id}`}
+                  to={`/plans/${plan._id}`}
                   key={plan._id}
                 >
                   <div
