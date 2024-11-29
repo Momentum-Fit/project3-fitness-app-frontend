@@ -13,7 +13,9 @@ function Navbar() {
 
   return (
     <nav>
-      <img className="logo" src={logo} />
+      <Link to="/">
+        <img className="logo" src={logo} />
+      </Link>
       <div className="nav-buttons-container">
         <Link to="/">
           <button
