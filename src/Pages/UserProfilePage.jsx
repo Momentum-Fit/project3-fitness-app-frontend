@@ -5,6 +5,8 @@ import { AuthContext } from '../context/auth.context';
 import { updateUserProfile, uploadImage } from "../services/fileupload.service";
 import Popup from '../components/Popup';
 import { UserContext } from '../context/user.context';
+import { FileInput, TextInput, Checkbox, Group, Button } from "@mantine/core";
+
 
 const UserProfilePage = () => {
   const { user, updateUserProfile } = useContext(UserContext);
@@ -65,19 +67,7 @@ const UserProfilePage = () => {
                 </div>
             </div>
 
-            <div className="flex justify-between mt-8 md:mt-0">
-                <button title="left arrow" className="p-2 mx-3 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:text-gray-200 dark:hover:bg-gray-800 dark:border-gray-700 hover:bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-
-                <button title="right arrow" className="p-2 text-gray-800 transition-colors duration-300 border rounded-full rtl:-scale-x-100 dark:text-gray-200 dark:hover:bg-gray-800 dark:border-gray-700 hover:bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
-            </div>
+            
         </div>
 
         <section className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 lg:grid-cols-2 xl:grid-cols-3">
@@ -105,28 +95,28 @@ const UserProfilePage = () => {
 </section>
 
 <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
-        <h2>Update Profile</h2>
+        <h2 className="mt-8 mb-5 font-bold">Update Profile</h2>
         <form>
           <label>Profile Picture</label>
-          <input type="file" onChange={handleFileUpload} />
-          <input type="text" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="Height" />
-          <input type="text" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="Weight" />
-          <textarea value={about} onChange={(e) => setAbout(e.target.value)} placeholder="About me" rows="4" cols="50"></textarea>
-          <div className="goals">
-            <label>
-              <input type="checkbox" checked={goals.weightLoss} onChange={() => setGoals({ ...goals, weightLoss: !goals.weightLoss })} />
+          <FileInput placeholder="Add a Profile Picture" onChange={handleFileUpload} />
+          <TextInput className="create-ex-input" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="Height" />
+          <TextInput className="create-ex-input" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="Weight" />
+          <TextInput className="create-ex-input" value={about} onChange={(e) => setAbout(e.target.value)} placeholder="About me" rows="4" cols="50" />
+          <Checkbox.Group label="Select Your Workout Goals">
+          <label className="exercise-check">
+          <Checkbox checked={goals.weightLoss} onChange={() => setGoals({ ...goals, weightLoss: !goals.weightLoss })} />
               Weight Loss
-            </label>
-            <label>
-              <input type="checkbox" checked={goals.muscleGain} onChange={() => setGoals({ ...goals, muscleGain: !goals.muscleGain })} />
+              </label>
+              <label className="exercise-check">
+              <Checkbox checked={goals.muscleGain} onChange={() => setGoals({ ...goals, muscleGain: !goals.muscleGain })} />
               Muscle Gain
-            </label>
-            <label>
-              <input type="checkbox" checked={goals.endurance} onChange={() => setGoals({ ...goals, endurance: !goals.endurance })} />
+              </label>
+              <label className="exercise-check">
+              <Checkbox checked={goals.endurance} onChange={() => setGoals({ ...goals, endurance: !goals.endurance })} />
               Endurance
             </label>
-          </div>
-          <button type="button" onClick={handleSaveProfile}>Save</button>
+            </Checkbox.Group>
+          <Button className="mt-5"type="button" onClick={handleSaveProfile}>Save</Button>
         </form>
       </Popup>
     </>

@@ -49,7 +49,7 @@ function Plans() {
 
   return (
     <section className="bg-#E5E8EB dark:bg-gray-900">
-      <div className="plans-container">
+      <div className="container px-6 py-12 mx-auto">
         <div className="container px-6 py-10 mx-auto">
           <div className="plans-pg-head">
             <h1
@@ -128,7 +128,7 @@ function Plans() {
                 >
                   <div
                     id="blue-container"
-                    className="p-8 space-y-3 h-[500px] border-2 border-blue-400 dark:border-blue-300 rounded-xl flex flex-col"
+                    className="p-6 space-y-3 h-[530px] border-2 border-blue-400 dark:border-blue-300 rounded-xl flex flex-col justify-between"
                   >
                     <div className="top-section-container">
                       <span className="inline-block text-blue-500 dark:text-blue-400"></span>
@@ -146,7 +146,7 @@ function Plans() {
                       </p>
                     </div>
 
-                    <div>
+                    <div className="self-end w-full mt-auto">
                       {isLoggedIn && (
                         <div className="mt-4 space-y-4">
                           <button
