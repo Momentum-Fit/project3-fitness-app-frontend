@@ -27,7 +27,7 @@ function MyPlan() {
     useState(false);
 
   const updatedPlanToast = () => {
-    toast.success("Exercise was created successfully!", {
+    toast.success("Plan was updated successfully!", {
       duration: 4000,
       position: "bottom-right",
     });
@@ -97,7 +97,8 @@ function MyPlan() {
         <div>
           <section className="bg-#E5E8EB dark:bg-gray-900">
             <div className="container px-6 py-10 mx-auto">
-              <Link to="/plans"
+              <Link
+                to="/plans"
                 id="back-btn"
                 className="flex items-center justify-center px-1 py-2 text-gray-500 capitalize bg-white rounded-md cursor-not-allowed dark:bg-gray-800 dark:text-gray-600"
               >
