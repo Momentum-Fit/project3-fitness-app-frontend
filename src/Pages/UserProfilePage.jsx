@@ -95,30 +95,31 @@ const UserProfilePage = () => {
 </section>
 
 <Popup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)}>
-        <h2 className="mt-8 mb-5 font-bold">Update Profile</h2>
+        <h2>Update Profile</h2>
         <form>
           <label>Profile Picture</label>
-          <FileInput placeholder="Add a Profile Picture" onChange={handleFileUpload} />
-          <TextInput className="create-ex-input" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="Height" />
-          <TextInput className="create-ex-input" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="Weight" />
-          <TextInput className="create-ex-input" value={about} onChange={(e) => setAbout(e.target.value)} placeholder="About me" rows="4" cols="50" />
-          <Checkbox.Group label="Select Your Workout Goals">
-          <label className="exercise-check">
-          <Checkbox checked={goals.weightLoss} onChange={() => setGoals({ ...goals, weightLoss: !goals.weightLoss })} />
+          <input type="file" onChange={handleFileUpload} />
+          <input type="text" value={height} onChange={(e) => setHeight(e.target.value)} placeholder="Height" />
+          <input type="text" value={weight} onChange={(e) => setWeight(e.target.value)} placeholder="Weight" />
+          <textarea value={about} onChange={(e) => setAbout(e.target.value)} placeholder="About me" rows="4" cols="50"></textarea>
+          <div className="goals">
+            <label>
+              <input type="checkbox" checked={goals.weightLoss} onChange={() => setGoals({ ...goals, weightLoss: !goals.weightLoss })} />
               Weight Loss
-              </label>
-              <label className="exercise-check">
-              <Checkbox checked={goals.muscleGain} onChange={() => setGoals({ ...goals, muscleGain: !goals.muscleGain })} />
+            </label>
+            <label>
+              <input type="checkbox" checked={goals.muscleGain} onChange={() => setGoals({ ...goals, muscleGain: !goals.muscleGain })} />
               Muscle Gain
-              </label>
-              <label className="exercise-check">
-              <Checkbox checked={goals.endurance} onChange={() => setGoals({ ...goals, endurance: !goals.endurance })} />
+            </label>
+            <label>
+              <input type="checkbox" checked={goals.endurance} onChange={() => setGoals({ ...goals, endurance: !goals.endurance })} />
               Endurance
             </label>
-            </Checkbox.Group>
-          <Button className="mt-5"type="button" onClick={handleSaveProfile}>Save</Button>
+          </div>
+          <button type="button" onClick={handleSaveProfile}>Save</button>
         </form>
       </Popup>
+
     </>
   );
 };
